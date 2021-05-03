@@ -4,17 +4,16 @@ public class MovimientoObstaculo : MonoBehaviour
 {
     public bool noPerder = false;
 
-    GameObject planeta;
     GameManager codigoGameManager;
 
-    float speed = 950f;
-    float posInicial = 7f;
+    float speed = 2.5f;
+    float posInicialMax = 7f;
 
     static int contrarioAUltimaAparicion = -1;
 
     void Start()
     {
-        planeta = GameObject.Find("Planeta");
+        GameObject planeta = GameObject.Find("Planeta");
         codigoGameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         int ladoAparicion;
@@ -29,39 +28,43 @@ public class MovimientoObstaculo : MonoBehaviour
         float posY;
         float posX;
 
+        // Asigno posicion random en base al lado
         switch (ladoAparicion) 
         {
             // Arriba
             case 0:
-                posX = Random.Range(-posInicial, posInicial);
-                posY = posInicial;
+                posX = Random.Range(-posInicialMax, posInicialMax);
+                posY = posInicialMax;
                 contrarioAUltimaAparicion = 2;
                 break;
             // Izquierda
             case 1:
-                posX = -posInicial;
-                posY = Random.Range(-posInicial, posInicial);
+                posX = -posInicialMax;
+                posY = Random.Range(-posInicialMax, posInicialMax);
                 contrarioAUltimaAparicion = 3;
                 break;
             // Abajo
             case 2:
-                posX = Random.Range(-posInicial, posInicial);
-                posY = -posInicial;
+                posX = Random.Range(-posInicialMax, posInicialMax);
+                posY = -posInicialMax;
                 contrarioAUltimaAparicion = 0;
                 break;
             // Derecha
             default:
-                posX = posInicial;
-                posY = Random.Range(-posInicial, posInicial);
+                posX = posInicialMax;
+                posY = Random.Range(-posInicialMax, posInicialMax);
                 contrarioAUltimaAparicion = 1;
                 break;
         }
 
+        // Fijo la posicion a la random asignada
         transform.position = new Vector2(posX, posY);
-
+        
+        // Hago que el obstaculo mire hacia el planeta
         transform.right = planeta.transform.position - transform.position;
 
-        GetComponent<Rigidbody2D>().velocity = transform.right * speed * Time.deltaTime;
+        // Fijo velocidad
+        GetComponent<Rigidbody2D>().velocity = transform.right * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

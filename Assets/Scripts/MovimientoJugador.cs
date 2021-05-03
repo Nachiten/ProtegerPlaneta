@@ -13,17 +13,18 @@ public class MovimientoJugador : MonoBehaviour
         float rotacionAplicada = 0;
 
         // Izquierda (+)
-        if (Input.GetKey(KeyCode.A)) 
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) 
         {
             rotacionAplicada = speedRotacion;
         }
 
         // Derecha (-)
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             rotacionAplicada = -speedRotacion;
         }
         
+        // Aplico rotacion correspondiente
         transform.Rotate(new Vector3(0, 0, rotacionAplicada * Time.deltaTime));
     }
 
