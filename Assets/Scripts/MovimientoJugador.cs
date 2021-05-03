@@ -29,6 +29,14 @@ public class MovimientoJugador : MonoBehaviour
 
         // Invierto posiciones y,z nuevamente
         transform.position = new Vector3(posicionesPosiblesJugador[1].x, posicionesPosiblesJugador[1].z, posicionesPosiblesJugador[1].y);
+
+        transform.right = planeta.transform.position - transform.position;
+
+        Vector3 rotacionEnEuler = transform.rotation.eulerAngles;
+
+        rotacionEnEuler.z += 90;
+
+        transform.rotation = Quaternion.Euler(rotacionEnEuler);
         
     }
 
