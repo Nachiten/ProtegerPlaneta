@@ -1,17 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovimientoJugador : MonoBehaviour
 {
     bool perdio = false;
-
-    public float speedRotacion = 0.5f;
-
-    void Start()
-    {
-        //planeta = GameObject.Find("Planeta");    
-    }
+    float speedRotacion = 250f;
 
     void Update()
     {
@@ -32,7 +24,7 @@ public class MovimientoJugador : MonoBehaviour
             rotacionAplicada = -speedRotacion;
         }
         
-        transform.Rotate(new Vector3(0, 0, rotacionAplicada));
+        transform.Rotate(new Vector3(0, 0, rotacionAplicada * Time.deltaTime));
     }
 
     public void aumentarSpeed(float aumento) 
