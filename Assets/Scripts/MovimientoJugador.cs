@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MovimientoJugador : MonoBehaviour
 {
+    bool perdio = false;
+    
     GameObject planeta;
 
     public float radioCirculo = 4;
@@ -15,13 +17,26 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
+        if (perdio)
+            return;
+
         // Obtengo posicion del mouse
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Vector3 posicionPlaneta = planeta.transform.position;
+        Vector3 planetaPos = planeta.transform.position;
+
+        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+        Vector2 planetaPos2D = new Vector2(planetaPos.x, planetaPos.y);
+
+        float distancia = Vector3.Distance(mousePos2D, planetaPos2D);
+
+        // Debug.Log("[MovimientoJugador] distancia: " + distancia);
+
+        if (distancia < radioCirculo)
+            return;
 
         // Invierto posiciones y,z
-        Vector3 posicionPlanetaCambiada = new Vector3(posicionPlaneta.x, posicionPlaneta.z, posicionPlaneta.y);
+        Vector3 posicionPlanetaCambiada = new Vector3(planetaPos.x, planetaPos.z, planetaPos.y);
         Vector3 mousePosCambiada = new Vector3(mousePos.x, mousePos.z, mousePos.y);
 
         // Calculo la posicion donde debe estar el jugador
@@ -38,6 +53,11 @@ public class MovimientoJugador : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(rotacionEnEuler);
         
+    }
+
+    public void perderJuego() 
+    {
+        perdio = true;
     }
 
     #region CalcularInterseccion

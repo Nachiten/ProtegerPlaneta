@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public void perderJuego() 
     {
         textoPerdiste.SetActive(true);
+        GetComponent<ObstacleSpawner>().perderJuego();
+        GameObject.Find("Jugador").GetComponent<MovimientoJugador>().perderJuego();
     }
 
     public void cargarEscena(int index) 

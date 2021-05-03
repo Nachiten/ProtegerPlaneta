@@ -8,8 +8,7 @@ public class MovimientoObstaculo : MonoBehaviour
     float speed = 3f;
     float posInicial = 7f;
 
-    // Start is called before the first frame update
-    void OnEnable()
+    void Start()
     {
         planeta = GameObject.Find("Planeta");
         codigoGameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -53,8 +52,8 @@ public class MovimientoObstaculo : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("[MovimientoObstaculo] OnTriggerEnter2D");
-        Debug.Log("Colisione con: " + collision.gameObject.name);
+        //Debug.Log("[MovimientoObstaculo] OnTriggerEnter2D");
+        //Debug.Log("Colisione con: " + collision.gameObject.name);
 
         if (collision.gameObject.CompareTag("Planeta")) 
         {
@@ -67,8 +66,7 @@ public class MovimientoObstaculo : MonoBehaviour
         {
             Debug.Log("Sumaste un punto!!");
             codigoGameManager.sumarPuntos(1);
-            gameObject.SetActive(false);
-            gameObject.SetActive(true);
+            Destroy(gameObject);
         }
     }
 
