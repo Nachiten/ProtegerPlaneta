@@ -5,14 +5,12 @@ using UnityEngine;
 public class MovimientoJugador : MonoBehaviour
 {
     bool perdio = false;
-    
-    GameObject planeta;
 
-    public float radioCirculo = 4;
+    public float speedRotacion = 0.5f;
 
     void Start()
     {
-        planeta = GameObject.Find("Planeta");    
+        //planeta = GameObject.Find("Planeta");    
     }
 
     void Update()
@@ -20,39 +18,26 @@ public class MovimientoJugador : MonoBehaviour
         if (perdio)
             return;
 
-        // Obtengo posicion del mouse
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float rotacionAplicada = 0;
 
-        Vector3 planetaPos = planeta.transform.position;
+        // Izquierda (+)
+        if (Input.GetKey(KeyCode.A)) 
+        {
+            rotacionAplicada = speedRotacion;
+        }
 
-        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-        Vector2 planetaPos2D = new Vector2(planetaPos.x, planetaPos.y);
-
-        float distancia = Vector3.Distance(mousePos2D, planetaPos2D);
-
-        // Debug.Log("[MovimientoJugador] distancia: " + distancia);
-
-        if (distancia < radioCirculo)
-            return;
-
-        // Invierto posiciones y,z
-        Vector3 posicionPlanetaCambiada = new Vector3(planetaPos.x, planetaPos.z, planetaPos.y);
-        Vector3 mousePosCambiada = new Vector3(mousePos.x, mousePos.z, mousePos.y);
-
-        // Calculo la posicion donde debe estar el jugador
-        Vector3[] posicionesPosiblesJugador = IntersectionPoint(mousePosCambiada, posicionPlanetaCambiada, posicionPlanetaCambiada, radioCirculo);
-
-        // Invierto posiciones y,z nuevamente
-        transform.position = new Vector3(posicionesPosiblesJugador[1].x, posicionesPosiblesJugador[1].z, posicionesPosiblesJugador[1].y);
-
-        transform.right = planeta.transform.position - transform.position;
-
-        Vector3 rotacionEnEuler = transform.rotation.eulerAngles;
-
-        rotacionEnEuler.z += 90;
-
-        transform.rotation = Quaternion.Euler(rotacionEnEuler);
+        // Derecha (-)
+        if (Input.GetKey(KeyCode.D))
+        {
+            rotacionAplicada = -speedRotacion;
+        }
         
+        transform.Rotate(new Vector3(0, 0, rotacionAplicada));
+    }
+
+    public void aumentarSpeed(float aumento) 
+    {
+        speedRotacion *= aumento;
     }
 
     public void perderJuego() 

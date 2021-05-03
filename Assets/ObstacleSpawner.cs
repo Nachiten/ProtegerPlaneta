@@ -14,6 +14,8 @@ public class ObstacleSpawner : MonoBehaviour
 
     int contador = 1;
 
+    float aumentoVelocidad = 1.01f;
+
     void Update()
     {
         if (perdio)
@@ -23,7 +25,8 @@ public class ObstacleSpawner : MonoBehaviour
 
         if (timePassed >= intervaloAumento * contador) 
         {
-            speed *= 1.01f;
+            speed *= aumentoVelocidad;
+            GameObject.Find("Jugador").GetComponent<MovimientoJugador>().aumentarSpeed(aumentoVelocidad + 0.01f);
 
             Debug.Log("[ObstacleSpawner] Aumentando velocidad");
             contador++;
