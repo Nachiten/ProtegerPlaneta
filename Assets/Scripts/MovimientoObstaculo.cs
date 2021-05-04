@@ -9,6 +9,8 @@ public class MovimientoObstaculo : MonoBehaviour
     GameObject planeta;
 
     public float speed = 2.5f;
+    public float daño;
+
     float posInicialMax = 7f;
 
     static int contrarioAUltimaAparicion = -1;
@@ -89,8 +91,7 @@ public class MovimientoObstaculo : MonoBehaviour
                 return;
             }
                     
-            Debug.Log("Perdiste el juego!!");
-            codigoGameManager.perderJuego();
+            codigoGameManager.perderVida(daño);
             
         }
 

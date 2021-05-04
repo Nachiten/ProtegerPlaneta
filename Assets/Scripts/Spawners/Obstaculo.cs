@@ -31,6 +31,11 @@ public class Obstaculo
         this.speedReloj = 0.7f;
         this.copiasPrefabs = 15;
 
+        obstaculosSpawneados = new List<GameObject>();
+        obstaculosOcultos = new List<GameObject>();
+
+        obstaculoParent = GameObject.Find("Obstaculos");
+
         this.speedObstaculo = speedObstaculo; 
         this.obstaclePrefab = obstaclePrefab;
         this.intervaloAparicion = intervaloAparicion;
@@ -38,16 +43,11 @@ public class Obstaculo
         this.daño = daño;
         this.color = color;
 
-        inicializar();
+        instanciarObjetos();
     }
 
-    void inicializar() 
+    void instanciarObjetos() 
     {
-        obstaculosSpawneados = new List<GameObject>();
-        obstaculosOcultos = new List<GameObject>();
-
-        obstaculoParent = GameObject.Find("Obstaculos");
-
         for (int i = 0; i < copiasPrefabs; i++)
         {
             GameObject obstaculoInstancia = Object.Instantiate(obstaclePrefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -55,7 +55,11 @@ public class Obstaculo
             obstaculoInstancia.SetActive(false);
             obstaculoInstancia.transform.parent = obstaculoParent.transform;
             obstaculoInstancia.GetComponent<SpriteRenderer>().color = color;
-            obstaculoInstancia.GetComponent<MovimientoObstaculo>().speed = speedObstaculo;
+
+            MovimientoObstaculo movimientoObstaculo = obstaculoInstancia.GetComponent<MovimientoObstaculo>();
+
+            movimientoObstaculo.speed = speedObstaculo;
+            movimientoObstaculo.daño = daño;
 
             string nombrePrefab = obstaculoInstancia.name.Substring(0, obstaculoInstancia.name.Length - 7);
 
@@ -106,20 +110,17 @@ public class Obstaculo
     {
         lock (lockListas)
         {
-            if (obstaculosSpawneados.Contains(unObstaculo))
-            {
-                unObstaculo.SetActive(false);
+            if (!obstaculosSpawneados.Contains(unObstaculo))
+                return;
 
-                // Quito de lista spawneados
-                obstaculosSpawneados.Remove(unObstaculo);
+            unObstaculo.SetActive(false);
 
-                // Agrego a lista ocultos
-                obstaculosOcultos.Add(unObstaculo);
-            }
-            else 
-            {
-                Debug.Log("[Obstaculo] Esta lista de obstaculos no contiene el buscado.");
-            }
+            // Quito de lista spawneados
+            obstaculosSpawneados.Remove(unObstaculo);
+
+            // Agrego a lista ocultos
+            obstaculosOcultos.Add(unObstaculo);
+            
         }
     }
 }
