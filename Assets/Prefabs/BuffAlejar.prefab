@@ -76,8 +76,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2574362395289725059}
   - component: {fileID: 2574362395289725058}
-  - component: {fileID: 8716062533128568993}
   - component: {fileID: 8514488625688176166}
+  - component: {fileID: 4729981220341633058}
   m_Layer: 0
   m_Name: RecolectableSprite
   m_TagString: BuffAlejar
@@ -150,18 +150,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8716062533128568993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2574362395289725057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 815fc175e4868ee49b57e10f9f99f5da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8514488625688176166
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,3 +176,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.98196363, y: 1.5720215}
   m_EdgeRadius: 0
+--- !u!114 &4729981220341633058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2574362395289725057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcfa828f0f93b5b4883c8e4c1b200efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
