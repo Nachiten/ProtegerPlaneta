@@ -20,7 +20,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 
 ; VERSION Alpha
-AppId={{F20908EC-AA6A-42CB-B0A9-7694809EF75B}}
+AppId={{7C8E8024-F2DD-4969-A0F8-15483F68BCD3}}
 
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
