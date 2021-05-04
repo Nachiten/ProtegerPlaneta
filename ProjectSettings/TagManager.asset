@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Jugador
   - Planeta
+  - Boost
+  - Buff
+  - BoostAgrandar
+  - BoostAcercar
+  - BuffAchicar
+  - BuffAlejar
   layers:
   - Default
   - TransparentFX

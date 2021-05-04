@@ -5,31 +5,43 @@ public class MovimientoObstaculo : MonoBehaviour
     public bool noPerder = false;
 
     GameManager codigoGameManager;
+    ObstacleSpawner spawnerObstaculos;
+    GameObject planeta;
 
-    float speed = 2.5f;
+    public float speed = 2.5f;
     float posInicialMax = 7f;
 
     static int contrarioAUltimaAparicion = -1;
 
-    void Start()
+    void Awake()
     {
-        GameObject planeta = GameObject.Find("Planeta");
-        codigoGameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        planeta = GameObject.Find("Planeta");
 
+        GameObject gameManager = GameObject.Find("GameManager");
+
+        codigoGameManager = gameManager.GetComponent<GameManager>();
+        spawnerObstaculos = gameManager.GetComponent<ObstacleSpawner>();
+
+        if (noPerder)
+            Debug.LogError("[MovimientoObstaculo] NO SE PERMITE PERDER!!");
+    }
+
+    private void OnEnable()
+    {
         int ladoAparicion;
 
         // Checkeo para no spawnear en el lado contrario al ultimo que aparecio
         do
         {
             ladoAparicion = Random.Range(0, 4);
-        } 
+        }
         while (ladoAparicion == contrarioAUltimaAparicion);
 
         float posY;
         float posX;
 
         // Asigno posicion random en base al lado
-        switch (ladoAparicion) 
+        switch (ladoAparicion)
         {
             // Arriba
             case 0:
@@ -59,38 +71,36 @@ public class MovimientoObstaculo : MonoBehaviour
 
         // Fijo la posicion a la random asignada
         transform.position = new Vector2(posX, posY);
-        
+
         // Hago que el obstaculo mire hacia el planeta
         transform.right = planeta.transform.position - transform.position;
 
         // Fijo velocidad
-        GetComponent<Rigidbody2D>().velocity = transform.right * speed;
+        GetComponent<Rigidbody2D>().velocity = transform.right.normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("[MovimientoObstaculo] OnTriggerEnter2D");
-        //Debug.Log("Colisione con: " + collision.gameObject.name);
-
         if (collision.gameObject.CompareTag("Planeta"))
         {
-            if (noPerder)
+            if (noPerder) 
             {
-                Destroy(gameObject);
+                spawnerObstaculos.ocultarObstaculo(gameObject);
                 return;
             }
-
+                    
             Debug.Log("Perdiste el juego!!");
             codigoGameManager.perderJuego();
-            Destroy(gameObject);
+            
         }
 
         if (collision.gameObject.CompareTag("Jugador")) 
         {
             Debug.Log("Sumaste un punto!!");
             codigoGameManager.sumarPuntos(1);
-            Destroy(gameObject);
+            
         }
-    }
 
+        spawnerObstaculos.ocultarObstaculo(gameObject);
+    }
 }
