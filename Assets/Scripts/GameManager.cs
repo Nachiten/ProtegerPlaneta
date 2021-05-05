@@ -43,9 +43,14 @@ public class GameManager : MonoBehaviour
         mostrarVida();
 
         if (vida == 0) 
-        {
             perderJuego();
-        }
+
+    }
+
+    public void aumentarVida(float suma)
+    {
+        vida = Mathf.Min(vida + suma, 10);
+        mostrarVida();
     }
 
     void perderJuego() 
@@ -53,10 +58,8 @@ public class GameManager : MonoBehaviour
         fillAreaScroll.SetActive(false);
 
         if (noPuedePerder) 
-        {
-            Debug.LogError("[GameManager] No se permite perder!!!");
             return;
-        }
+        
             
         textoPerdiste.SetActive(true);
         GetComponent<ObstacleSpawner>().perderJuego();

@@ -15,6 +15,7 @@ public class RecolectableSpawner : MonoBehaviour
         recolectables.Add(new Recolectable(GameObject.Find("BuffAchicar"), 30, 35));
         recolectables.Add(new Recolectable(GameObject.Find("BoostAcercar"), 20, 25));
         recolectables.Add(new Recolectable(GameObject.Find("BuffAlejar"), 35, 40));
+        recolectables.Add(new Recolectable(GameObject.Find("BoostVida"), 20, 50));
     }
 
     void Update()

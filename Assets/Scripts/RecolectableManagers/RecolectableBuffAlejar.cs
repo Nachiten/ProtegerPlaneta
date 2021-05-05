@@ -10,6 +10,5 @@ public class RecolectableBuffAlejar : ARecolectableSpriteManager
         playerBoostManager.modificarRadio(2.7f);
 
         transform.parent.gameObject.SetActive(false);
-
     }
 }

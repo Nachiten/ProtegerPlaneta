@@ -15,9 +15,8 @@ public class ObstacleSpawner : MonoBehaviour
 
         // Obstaculo Facil
         obstaculos.Add(new Obstaculo(3f, 0.05f, 2.8f, obstaclePrefab, 0.7f, new Color(1, 1, 0, 1)));
-
         // Obstaculo Dificil
-        obstaculos.Add(new Obstaculo(6f, 0.02f, 1.9f, obstaclePrefab, 2.3f, new Color(1, 0, 0, 1)));
+        obstaculos.Add(new Obstaculo(6f, 0.02f, 1.9f, obstaclePrefab, 2f, new Color(1, 0, 0, 1)));
     }
 
     void Update()
