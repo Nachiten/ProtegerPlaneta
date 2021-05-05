@@ -10,6 +10,5 @@ public class RecolectableBoostAgrandar : ARecolectableSpriteManager
         playerBoostManager.modificarTamaño(1.55f);
 
         transform.parent.gameObject.SetActive(false);
-
     }
 }

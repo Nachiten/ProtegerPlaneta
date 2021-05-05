@@ -7,20 +7,7 @@ public abstract class ARecolectableSpriteManager : MonoBehaviour
     private void Awake()
     {
         playerBoostManager = GameObject.Find("JugadorSprite").GetComponent<PlayerBoostManager>();
-    }
 
-    private void OnEnable()
-    {
-        float radioActual = playerBoostManager.radioActual;
-
-        // Aplico radio actual del jugador
-        fijarRadio(radioActual);
-    }
-
-    void fijarRadio(float radio)
-    {
-        Vector3 posicionActual = transform.localPosition;
-
-        transform.localPosition = new Vector3(posicionActual.x, radio, posicionActual.z);
+        transform.localPosition = new Vector3(0, 0, 0);
     }
 }

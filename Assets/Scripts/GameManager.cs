@@ -5,18 +5,24 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public bool noPuedePerder = false;
+
     int puntos = 0;
+
     TMP_Text textoPuntos;
+
     Slider scrollbarVida;
+
     GameObject textoPerdiste;
     GameObject fillAreaScroll;
+
     float vida = 10;
 
     private void Start()
     {
         textoPuntos = GameObject.Find("Puntos").GetComponent<TMP_Text>();
-        textoPerdiste = GameObject.Find("HasPerdido");
         scrollbarVida = GameObject.Find("MedidorVida").GetComponent<Slider>();
+        textoPerdiste = GameObject.Find("HasPerdido");
         fillAreaScroll = GameObject.Find("FillAreaVida");
 
         mostrarPuntos();
@@ -25,7 +31,6 @@ public class GameManager : MonoBehaviour
         textoPerdiste.SetActive(false);
     }
 
-    
     public void sumarPuntos(int puntos) 
     {
         this.puntos += puntos;
@@ -46,6 +51,13 @@ public class GameManager : MonoBehaviour
     void perderJuego() 
     {
         fillAreaScroll.SetActive(false);
+
+        if (noPuedePerder) 
+        {
+            Debug.LogError("[GameManager] No se permite perder!!!");
+            return;
+        }
+            
         textoPerdiste.SetActive(true);
         GetComponent<ObstacleSpawner>().perderJuego();
         GetComponent<RecolectableSpawner>().perderJuego();
@@ -67,4 +79,8 @@ public class GameManager : MonoBehaviour
         textoPuntos.text = puntos.ToString();
     }
 
+    public void setearNoPuedePerder(bool valor) 
+    {
+        noPuedePerder = valor;
+    }
 }

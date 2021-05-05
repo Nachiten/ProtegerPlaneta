@@ -2,23 +2,21 @@ using UnityEngine;
 
 public class RecolectableManager : MonoBehaviour
 {
-    float tiempoAnimacion = 2.6f;
+    public GameObject guia;
+
+    float velocidad = 0.5f;
 
     void OnEnable()
     {
+        transform.position = new Vector3(0,0,0);
+
         float rotacionZ = Random.Range(0, 360);
 
-        // Aplico rotacion correspondiente
+        //Aplico rotacion correspondiente
         transform.Rotate(new Vector3(0, 0, rotacionZ));
-    }
-    public void habilitar() 
-    {
-        LeanTween.scale(gameObject, new Vector3(0, 0, 0), 0).setOnComplete(animarCrecimiento);
-    }
 
-    void animarCrecimiento() 
-    {
-        gameObject.SetActive(true);
-        LeanTween.scale(gameObject, new Vector3(1,1,1), tiempoAnimacion);
+        transform.right = guia.transform.position - transform.position;
+
+        GetComponent<Rigidbody2D>().velocity = -transform.right.normalized * velocidad;
     }
 }

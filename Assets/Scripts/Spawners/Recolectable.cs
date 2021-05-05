@@ -23,7 +23,7 @@ public class Recolectable
 
         timePassed = 0;
         estoyEnCooldown = false;
-        tiempoAparicion = 6f;
+        tiempoAparicion = 15f;
     }
 
     public void correrReloj()
@@ -46,7 +46,7 @@ public class Recolectable
             estoyEnCooldown = true;
             timePassed = 0;
 
-            objetoRecolectable.GetComponent<RecolectableManager>().habilitar();
+            objetoRecolectable.SetActive(true);
 
             fijarIntervaloAparicion();
         }
