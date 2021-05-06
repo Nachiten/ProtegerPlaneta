@@ -79,6 +79,8 @@ public class MovimientoObstaculo : MonoBehaviour
 
         // Fijo velocidad
         GetComponent<Rigidbody2D>().velocity = transform.right.normalized * speed;
+
+        transform.Rotate(new Vector3(0,0,-90));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

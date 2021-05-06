@@ -13,7 +13,6 @@ public class Obstaculo
     int copiasPrefabs;
 
     float daño;
-    Color color;
 
     List<GameObject> obstaculosSpawneados;
     List<GameObject> obstaculosOcultos;
@@ -23,7 +22,7 @@ public class Obstaculo
 
     private readonly object lockListas = new object();
 
-    public Obstaculo(float intervaloAparicion, float aumentoVelocidad, float speedObstaculo,  GameObject obstaclePrefab, float daño, Color color) 
+    public Obstaculo(float intervaloAparicion, float aumentoVelocidad, float speedObstaculo,  GameObject obstaclePrefab, float daño) 
     {
         // Valores fijos
         this.timePassed = 0f;
@@ -41,7 +40,6 @@ public class Obstaculo
         this.intervaloAparicion = intervaloAparicion;
         this.aumentoVelocidad = aumentoVelocidad;
         this.daño = daño;
-        this.color = color;
 
         instanciarObjetos();
     }
@@ -54,7 +52,6 @@ public class Obstaculo
 
             obstaculoInstancia.SetActive(false);
             obstaculoInstancia.transform.parent = obstaculoParent.transform;
-            obstaculoInstancia.GetComponent<SpriteRenderer>().color = color;
 
             MovimientoObstaculo movimientoObstaculo = obstaculoInstancia.GetComponent<MovimientoObstaculo>();
 

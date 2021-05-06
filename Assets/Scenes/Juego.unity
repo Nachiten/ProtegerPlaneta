@@ -2156,7 +2156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dea8c658dbc71458dc770d82b493ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 2676880401702871618, guid: 166b4f7d35e46b743bfb8d311276a374, type: 3}
+  obstaculoFacilPrefab: {fileID: 2676880401702871618, guid: 166b4f7d35e46b743bfb8d311276a374, type: 3}
+  obstaculoMedioPrefab: {fileID: 2676880401702871618, guid: e1e2247ff49a7664fa89ef61260d0eda, type: 3}
+  obstaculoDificilPrefab: {fileID: 2676880401702871618, guid: ddb904a72a350aa4e8b0efb790807d09, type: 3}
 --- !u!114 &1429136672
 MonoBehaviour:
   m_ObjectHideFlags: 0

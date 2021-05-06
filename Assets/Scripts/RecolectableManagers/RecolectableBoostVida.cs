@@ -14,7 +14,7 @@ public class RecolectableBoostVida : ARecolectableSpriteManager
         if (!collision.gameObject.CompareTag("Jugador"))
             return;
 
-        codigoGameManager.aumentarVida(2.2f);
+        codigoGameManager.aumentarVida(2.4f);
 
         transform.parent.gameObject.SetActive(false);
     }
