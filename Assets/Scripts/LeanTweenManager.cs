@@ -120,7 +120,8 @@ public class LeanTweenManager : MonoBehaviour
     {
         menuPanel.SetActive(false);
 
-        foreach (GameObject boton in botones) {
+        foreach (GameObject boton in botones) 
+        {
             boton.SetActive(false);
         }
 

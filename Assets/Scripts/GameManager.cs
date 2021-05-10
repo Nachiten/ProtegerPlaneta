@@ -28,14 +28,17 @@ public class GameManager : MonoBehaviour
 
     Func<bool> funcionPerdiJuego = null;
 
-    public static GameMode gameModeActual = GameMode.Easy;
+    public static GameMode gameModeActual = GameMode.Normal;
 
-    public GameMode obtenerGameMode() {
+    public GameMode obtenerGameMode() 
+    {
         return gameModeActual;
     }
 
     private void Start()
     {
+        Debug.Log("[GameManager] Modo de juego actual: " + gameModeActual);
+
         textoPuntos = GameObject.Find("Puntos").GetComponent<TMP_Text>();
         scrollbarVida = GameObject.Find("MedidorVida").GetComponent<Slider>();
         textoPerdiste = GameObject.Find("HasPerdido");
@@ -47,8 +50,10 @@ public class GameManager : MonoBehaviour
         textoPerdiste.SetActive(false);
 
         // Asigno puntero a funcion dependiendo del modo actual de juego
-        //funcionPerdiJuego = perdiJuegoNormal;
-        funcionPerdiJuego = perdiJuegoHardcore;
+        if (gameModeActual == GameMode.Hardcore)
+            funcionPerdiJuego = perdiJuegoHardcore;
+        else
+            funcionPerdiJuego = perdiJuegoNormal;
     }
 
     bool perdiJuegoNormal() 
