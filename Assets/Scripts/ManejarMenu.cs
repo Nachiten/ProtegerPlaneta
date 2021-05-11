@@ -20,8 +20,12 @@ public class ManejarMenu : MonoBehaviour
     // Manager de las animaciones
     static LeanTweenManager tweenManager;
 
+    static TMP_Text textoBotonComenzar;
+
     // Index de escena actual
     int index;
+
+    string continuarString = "CONTINUAR", comenzarString = "COMENZAR";
 
     #endregion
 
@@ -39,7 +43,9 @@ public class ManejarMenu : MonoBehaviour
             panelMenu = GameObject.Find("PanelMenu");
             opciones = GameObject.Find("MenuOpciones");
             creditos = GameObject.Find("MenuCreditos");
-           
+
+            textoBotonComenzar = GameObject.Find("TextoBotonComenzar").GetComponent<TMP_Text>();
+
             tweenManager = GameObject.Find("Canvas Menu").GetComponent<LeanTweenManager>();
 
             variablesAsignadas = true;
@@ -51,12 +57,14 @@ public class ManejarMenu : MonoBehaviour
             // Oculto todo de una patada pq se esta mostrando la pantalla de carga
             menu.SetActive(false);
             panelMenu.SetActive(false);
+            textoBotonComenzar.text = continuarString;
         }
         // Estoy en el menu principal
         else
         {
             menu.SetActive(true);
             menuActivo = true;
+            textoBotonComenzar.text = comenzarString;
         }
 
         opciones.SetActive(false);

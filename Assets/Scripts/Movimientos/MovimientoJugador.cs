@@ -5,27 +5,54 @@ public class MovimientoJugador : MonoBehaviour
     bool perdio = false;
     float speedRotacion = 250f;
 
+    float speedDifficultyMultiplier;
+
+    GameMode gameModeActual;
+
+    void Awake()
+    {
+        gameModeActual = GameObject.Find("GameManager").GetComponent<GameManager>().obtenerGameMode();
+
+        // Cambio velocidad de movimiento del jugador en base a dificulta
+        switch (gameModeActual)
+        {
+            // Dificultad facil tiene mas velocidad
+            case GameMode.Easy:
+                speedDifficultyMultiplier = 1.3f;
+                break;
+            // Dificultad alta y hardcore tienen menos velocidad
+            case GameMode.Difficult:
+            case GameMode.Hardcore:
+                speedDifficultyMultiplier = 0.7f;
+                break;
+            // Caso dificultad media
+            default:
+                speedDifficultyMultiplier = 1f;
+                break;
+        }
+    }
+
     void Update()
     {
         if (perdio)
             return;
 
-        float rotacionAplicada = 0;
+        int signoRotacion = 0;
 
         // Izquierda (+)
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || clickeoIzquierdaPantalla()) 
         {
-            rotacionAplicada = speedRotacion;
+            signoRotacion = 1;
         }
 
         // Derecha (-)
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || clickeoDerechaPantalla())
         {
-            rotacionAplicada = -speedRotacion;
+            signoRotacion = -1;
         }
         
         // Aplico rotacion correspondiente
-        transform.Rotate(new Vector3(0, 0, rotacionAplicada * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, signoRotacion * Time.deltaTime * speedRotacion * speedDifficultyMultiplier));
 
         ejecutarReloj();
     }

@@ -14,25 +14,70 @@ public class Buttons : MonoBehaviour
 
     private static readonly object setearVariablesLock = new object();
 
+    static int indexActual = -1;
+    bool yaCargada = false;
+
     /* -------------------------------------------------------------------------------- */
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    // Se llama cuando una nueva escena se carga
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Si es la misma escena que antes
+        if (indexActual == scene.buildIndex)
+        {
+            // Si es la misma escena recargada (la primera vez)
+            if (!yaCargada)
+                setupInicial();
+            // Si es la segunda o mas veces seguidas que quiere cargar
+            else
+                return;
+        }
+        // Si es una escena nueva, inicializo
+        else
+            setupInicial();
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    // Setup que se hace por unica vez
     void Awake()
     {
         lock (setearVariablesLock) 
-        { 
+        {
             if (variablesSeteadas)
                 return;
 
-            GameObject objetoGameManager = GameObject.Find("GameManager");
-
-            codigoManejarMenu = objetoGameManager.GetComponent<ManejarMenu>();
-            codigoLevelLoader = objetoGameManager.GetComponent<LevelLoader>();
             codigoSoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
             codigoPopUpsMenu = GameObject.Find("Pop Up").GetComponent<PopUpsMenu>();
 
             variablesSeteadas = true;
         }
+    }
+
+    // Setup que se hace en cada nueva escena cargada
+    void setupInicial() 
+    {
+        yaCargada = true;
+
+        Debug.Log("[Buttons] SetupInicial");
+
+        GameObject objetoGameManager = GameObject.Find("GameManager");
+
+        codigoManejarMenu = objetoGameManager.GetComponent<ManejarMenu>();
+        codigoLevelLoader = objetoGameManager.GetComponent<LevelLoader>();
     }
 
     #region Botones

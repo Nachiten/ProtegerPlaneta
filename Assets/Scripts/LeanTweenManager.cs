@@ -11,23 +11,45 @@ public class LeanTweenManager : MonoBehaviour
     List<GameObject> botones;
 
     static GameObject menu, menuPanel, menuOpciones, menuCreditos, botonesInicio;
-    static GameObject botonComenzar, botonSeleccionarNivel, botonOpciones, botonSalir, botonVolverInicio, botonBorrarProgreso, botonCreditos;
+    static GameObject botonComenzar, botonOpciones, botonSalir, botonVolverInicio, botonBorrarProgreso, botonCreditos;
 
     public bool animacionEnEjecucion = false;
 
-    static bool variablesSeteadas = false;
     static int indexActual = -1;
-
     bool yaCargada = false;
 
     #endregion
 
     /* -------------------------------------------------------------------------------- */
 
-    // called first
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    // Setup que se hace una sola vez
+    void Awake()
+    {
+        // Objetos
+        menu = GameObject.Find("Menu");
+        menuPanel = GameObject.Find("PanelMenu");
+        menuOpciones = GameObject.Find("MenuOpciones");
+        menuCreditos = GameObject.Find("MenuCreditos");
+
+        // Botones
+        botonSalir = GameObject.Find("Salir");
+        botonComenzar = GameObject.Find("Comenzar");
+        botonOpciones = GameObject.Find("Opciones");
+
+        // Botonces condicionales
+        botonVolverInicio = GameObject.Find("VolverAInicio");
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -52,47 +74,20 @@ public class LeanTweenManager : MonoBehaviour
 
     /* -------------------------------------------------------------------------------- */
 
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    /* -------------------------------------------------------------------------------- */
-
+    // Setup que se hace en cada nueva escena cargada
     void setupInicial() 
     {
+        Debug.Log("[LeanTweenManager] SetupInicial");
+
         yaCargada = true;
 
-        //Debug.Log("[LeanTweenManager] setupInicial");
-
-        indexActual = SceneManager.GetActiveScene().buildIndex;
-
-        if (!variablesSeteadas)
-        {
-            // Objetos
-            menu = GameObject.Find("Menu");
-            menuPanel = GameObject.Find("PanelMenu");
-            menuOpciones = GameObject.Find("MenuOpciones");
-            menuCreditos = GameObject.Find("MenuCreditos");
-
-            // Botones
-            botonSalir = GameObject.Find("Salir");
-            botonComenzar = GameObject.Find("Comenzar");
-            botonOpciones = GameObject.Find("Opciones");
-            botonSeleccionarNivel = GameObject.Find("Seleccionar Nivel");
-
-            // Botonces condicionales
-            botonVolverInicio = GameObject.Find("VolverAInicio");
-
-            variablesSeteadas = true;
-        }
-        
         botones = new List<GameObject>();
 
         botones.Add(botonSalir);
         botones.Add(botonComenzar);
         botones.Add(botonOpciones);
-        botones.Add(botonSeleccionarNivel);
+
+        indexActual = SceneManager.GetActiveScene().buildIndex;
 
         if (indexActual == 0)
         {

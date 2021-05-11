@@ -15,25 +15,20 @@ public enum GameMode
 public class GameManager : MonoBehaviour
 {
     public bool noPuedePerder = false;
+    int puntos = 0;
+    float vidaActual = 10f;
 
-    public int puntos = 0;
-    public float vida = 10;
+    float vidaTotal = 10f;
 
     TMP_Text textoPuntos;
 
     Slider scrollbarVida;
 
-    GameObject textoPerdiste;
-    GameObject fillAreaScroll;
+    GameObject textoPerdiste, fillAreaScroll;
 
     Func<bool> funcionPerdiJuego = null;
 
     public static GameMode gameModeActual = GameMode.Normal;
-
-    public GameMode obtenerGameMode() 
-    {
-        return gameModeActual;
-    }
 
     private void Start()
     {
@@ -43,6 +38,8 @@ public class GameManager : MonoBehaviour
         scrollbarVida = GameObject.Find("MedidorVida").GetComponent<Slider>();
         textoPerdiste = GameObject.Find("HasPerdido");
         fillAreaScroll = GameObject.Find("FillAreaVida");
+
+        ajustarVidaEnBaseADificultad();
 
         mostrarPuntos();
         mostrarVida();
@@ -56,36 +53,18 @@ public class GameManager : MonoBehaviour
             funcionPerdiJuego = perdiJuegoNormal;
     }
 
+    /* ------------------------------------------------------------------------------------ */
+    /* ----------------------------------- PERDER JUEGO ----------------------------------- */
+    /* ------------------------------------------------------------------------------------ */
+
     bool perdiJuegoNormal() 
     {
-        return vida <= 0f;
+        return vidaActual <= 0f;
     }
 
     bool perdiJuegoHardcore()
     {
         return true;
-    }
-
-    public void sumarPuntos(int puntos) 
-    {
-        this.puntos += puntos;
-        mostrarPuntos();
-    }
-
-    public void perderVida(float daño) 
-    {
-        vida = Mathf.Max(vida - daño, 0f);
-        mostrarVida();
-
-        if (funcionPerdiJuego()) 
-            perderJuego();
-
-    }
-
-    public void aumentarVida(float suma)
-    {
-        vida = Mathf.Min(vida + suma, 10);
-        mostrarVida();
     }
 
     void perderJuego() 
@@ -95,21 +74,44 @@ public class GameManager : MonoBehaviour
         if (noPuedePerder) 
             return;
         
-            
         textoPerdiste.SetActive(true);
         GetComponent<ObstacleSpawner>().perderJuego();
         GetComponent<RecolectableSpawner>().perderJuego();
         GameObject.Find("Jugador").GetComponent<MovimientoJugador>().perderJuego();
     }
 
-    public void cargarEscena(int index) 
+    /* ---------------------------------------------------------------------------------- */
+    /* -------------------------------------- VIDA -------------------------------------- */
+    /* ---------------------------------------------------------------------------------- */
+
+    public void perderVida(float daño)
     {
-        SceneManager.LoadScene(index);
+        vidaActual = Mathf.Max(vidaActual - daño, 0f);
+        mostrarVida();
+
+        if (funcionPerdiJuego())
+            perderJuego();
+    }
+
+    public void aumentarVida(float suma)
+    {
+        vidaActual = Mathf.Min(vidaActual + suma, vidaTotal);
+        mostrarVida();
     }
 
     void mostrarVida() 
     {
-        scrollbarVida.value = vida / 10;
+        scrollbarVida.value = vidaActual / vidaTotal;
+    }
+
+    /* -------------------------------------------------------------------------------- */
+    /* ------------------------------------ PUNTOS ------------------------------------ */
+    /* -------------------------------------------------------------------------------- */
+
+    public void sumarPuntos(int puntos)
+    {
+        this.puntos += puntos;
+        mostrarPuntos();
     }
 
     void mostrarPuntos()
@@ -117,8 +119,35 @@ public class GameManager : MonoBehaviour
         textoPuntos.text = puntos.ToString();
     }
 
-    public void setearNoPuedePerder(bool valor) 
+    /* --------------------------------------------------------------------------------- */
+    /* ------------------------------------- OTROS ------------------------------------- */
+    /* --------------------------------------------------------------------------------- */
+
+    public GameMode obtenerGameMode()
     {
-        noPuedePerder = valor;
+        return gameModeActual;
+    }
+
+    void ajustarVidaEnBaseADificultad()
+    {
+        // Cambio velocidad de movimiento del jugador en base a dificultad
+        switch (gameModeActual)
+        {
+            // Dificultad facil tiene mas vida
+            case GameMode.Easy:
+                vidaTotal = 13f;
+                break;
+            // Dificultad alta y hardcore tienen menos vida
+            case GameMode.Difficult:
+            case GameMode.Hardcore:
+                vidaTotal = 7.5f;
+                break;
+            // Caso dificultad media
+            default:
+                vidaTotal = 10f;
+                break;
+        }
+
+        vidaActual = vidaTotal;
     }
 }

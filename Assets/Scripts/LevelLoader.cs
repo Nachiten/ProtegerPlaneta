@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -13,7 +12,7 @@ public class LevelLoader : MonoBehaviour
 
     static bool variablesAsignadas = false;
 
-    int indexACargar;
+    int indexACargar = 0;
 
     /* -------------------------------------------------------------------------------- */
 
@@ -21,6 +20,8 @@ public class LevelLoader : MonoBehaviour
     {
         if (!variablesAsignadas)
         {
+            Debug.Log("[LevelLoader] Asignando variables.");
+
             // Aisgnar variables
             levelLoader = GameObject.Find("Panel Carga");
             textoProgreso = GameObject.Find("TextoProgreso").GetComponent<TMP_Text>();
@@ -56,6 +57,8 @@ public class LevelLoader : MonoBehaviour
     // Iniciar Corutina para cargar nivel en background
     IEnumerator cargarAsincronizadamente(int index)
     {
+        Debug.Log("[LevelLoader] CargarAsincronico");
+
         // Iniciar carga de escena
         AsyncOperation operacion = SceneManager.LoadSceneAsync(index);
 
@@ -133,6 +136,8 @@ public class LevelLoader : MonoBehaviour
 
     void completarCargaNivel() 
     {
+        Debug.Log("[LevelLoader] Llamo a carga asincronica");
+
         StartCoroutine(cargarAsincronizadamente(indexACargar));
     }
 

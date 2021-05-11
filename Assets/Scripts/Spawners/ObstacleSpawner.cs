@@ -19,6 +19,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         gameModeActual = GameObject.Find("GameManager").GetComponent<GameManager>().obtenerGameMode();
 
+        // Cambio velocidad de obstaculos en base a dificultad
         switch (gameModeActual) 
         {
             // Dificultad facil tiene menos velocidad
