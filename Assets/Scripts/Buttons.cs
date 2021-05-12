@@ -10,13 +10,8 @@ public class Buttons : MonoBehaviour
     static ManejarMenu codigoManejarMenu;
     static SoundManager codigoSoundManager;
 
-    //static int indexActual = -1;
-
     static bool variablesSeteadas = false;
     private static readonly object setearVariablesLock = new object();
-
-    //bool yaCargada = false;
-    //private static readonly object inicializacionLock = new object();
 
     /* -------------------------------------------------------------------------------- */
 
@@ -36,23 +31,6 @@ public class Buttons : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         setupInicial();
-
-        //lock (inicializacionLock) 
-        //{
-        //    // Si es la misma escena que antes
-        //    if (indexActual == scene.buildIndex)
-        //    {
-        //        // Si es la misma escena recargada (la primera vez)
-        //        if (!yaCargada)
-        //            setupInicial();
-        //        // Si es la segunda o mas veces seguidas que quiere cargar
-        //        else
-        //            return;
-        //    }
-        //    // Si es una escena nueva, inicializo
-        //    else
-        //        setupInicial();
-        //}
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -130,6 +108,13 @@ public class Buttons : MonoBehaviour
         codigoPopUpsMenu.abrirPopUp(0);
     }
 
+    public void botonPuntajesRecord()
+    {
+        reproducirSonidoClickBoton();
+
+        codigoManejarMenu.manejarPuntajesRecord();
+    }
+
     public void botonCreditos() 
     {
         reproducirSonidoClickBoton();
@@ -151,10 +136,7 @@ public class Buttons : MonoBehaviour
 
     /* -------------------------------------------------------------------------------- */
 
-    void reproducirSonidoClickBoton() 
-    {
-        codigoSoundManager.reproducirSonido(1);
-    }
+    void reproducirSonidoClickBoton() { codigoSoundManager.reproducirSonido(1); }
 
     /* -------------------------------------------------------------------------------- */
 }

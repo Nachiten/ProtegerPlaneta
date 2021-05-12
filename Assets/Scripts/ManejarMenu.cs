@@ -7,15 +7,13 @@ public class ManejarMenu : MonoBehaviour
     #region Variables
 
     // Flags varios
-    bool menuActivo = false, opcionesActivas = false, creditosActivos = false;
+    bool menuActivo = false, opcionesActivas = false, creditosActivos = false, puntajesRecordActivos = false;
 
     // Flag de ya asigne las variables
     static bool variablesAsignadas = false;
 
     // GameObjects
-    static GameObject menu, creditos, panelMenu;
-
-    static GameObject opciones;
+    static GameObject menu, menuCreditos, panelMenu, menuOpciones, menuPuntajesRecord;
 
     // Manager de las animaciones
     static LeanTweenManager tweenManager;
@@ -33,16 +31,15 @@ public class ManejarMenu : MonoBehaviour
 
     #region FuncionStart
 
-    void Start()
+    private void Awake()
     {
-        index = SceneManager.GetActiveScene().buildIndex;
-       
         if (!variablesAsignadas)
         {
             menu = GameObject.Find("Menu");
             panelMenu = GameObject.Find("PanelMenu");
-            opciones = GameObject.Find("MenuOpciones");
-            creditos = GameObject.Find("MenuCreditos");
+            menuOpciones = GameObject.Find("MenuOpciones");
+            menuCreditos = GameObject.Find("MenuCreditos");
+            menuPuntajesRecord = GameObject.Find("MenuPuntajesRecord");
 
             textoBotonComenzar = GameObject.Find("TextoBotonComenzar").GetComponent<TMP_Text>();
 
@@ -50,6 +47,11 @@ public class ManejarMenu : MonoBehaviour
 
             variablesAsignadas = true;
         }
+    }
+
+    void Start()
+    {
+        index = SceneManager.GetActiveScene().buildIndex;
 
         // No estoy en el menu principal
         if (index != 0)
@@ -67,8 +69,9 @@ public class ManejarMenu : MonoBehaviour
             textoBotonComenzar.text = comenzarString;
         }
 
-        opciones.SetActive(false);
-        creditos.SetActive(false);
+        menuOpciones.SetActive(false);
+        menuCreditos.SetActive(false);
+        menuPuntajesRecord.SetActive(false);
     }
 
     #endregion
@@ -99,15 +102,12 @@ public class ManejarMenu : MonoBehaviour
 
         if (menuActivo)
         {
-            //Debug.Log("[ManejarMenu] Abriendo menu.");
             menu.SetActive(true);
             tweenManager.abrirMenu();
         }
         else 
-        {
-            //Debug.Log("[ManejarMenu] Cerrando menu.");
             tweenManager.cerrarMenu();
-        }
+        
 
         if (opcionesActivas) 
         {
@@ -123,13 +123,10 @@ public class ManejarMenu : MonoBehaviour
         opcionesActivas = !opcionesActivas;
 
         if (opcionesActivas) 
-        { 
             tweenManager.abrirOpciones();
-        }
+        
         else
-        { 
             tweenManager.cerrarOpciones();
-        }
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -139,9 +136,17 @@ public class ManejarMenu : MonoBehaviour
 
         if (creditosActivos)
             tweenManager.abrirCreditos();
-        
         else
             tweenManager.cerrarCreditos();
-        
+    }
+
+    public void manejarPuntajesRecord()
+    {
+        puntajesRecordActivos = !puntajesRecordActivos;
+
+        if (puntajesRecordActivos)
+            tweenManager.abrirPuntajesRecord();
+        else
+            tweenManager.cerrarPuntajesRecord();
     }
 }
