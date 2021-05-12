@@ -10,12 +10,13 @@ public class Buttons : MonoBehaviour
     static ManejarMenu codigoManejarMenu;
     static SoundManager codigoSoundManager;
 
-    static bool variablesSeteadas = false;
+    //static int indexActual = -1;
 
+    static bool variablesSeteadas = false;
     private static readonly object setearVariablesLock = new object();
 
-    static int indexActual = -1;
-    bool yaCargada = false;
+    //bool yaCargada = false;
+    //private static readonly object inicializacionLock = new object();
 
     /* -------------------------------------------------------------------------------- */
 
@@ -34,19 +35,24 @@ public class Buttons : MonoBehaviour
     // Se llama cuando una nueva escena se carga
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Si es la misma escena que antes
-        if (indexActual == scene.buildIndex)
-        {
-            // Si es la misma escena recargada (la primera vez)
-            if (!yaCargada)
-                setupInicial();
-            // Si es la segunda o mas veces seguidas que quiere cargar
-            else
-                return;
-        }
-        // Si es una escena nueva, inicializo
-        else
-            setupInicial();
+        setupInicial();
+
+        //lock (inicializacionLock) 
+        //{
+        //    // Si es la misma escena que antes
+        //    if (indexActual == scene.buildIndex)
+        //    {
+        //        // Si es la misma escena recargada (la primera vez)
+        //        if (!yaCargada)
+        //            setupInicial();
+        //        // Si es la segunda o mas veces seguidas que quiere cargar
+        //        else
+        //            return;
+        //    }
+        //    // Si es una escena nueva, inicializo
+        //    else
+        //        setupInicial();
+        //}
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -70,7 +76,7 @@ public class Buttons : MonoBehaviour
     // Setup que se hace en cada nueva escena cargada
     void setupInicial() 
     {
-        yaCargada = true;
+        //yaCargada = true;
 
         Debug.Log("[Buttons] SetupInicial");
 

@@ -20,7 +20,7 @@ public class LevelLoader : MonoBehaviour
     {
         if (!variablesAsignadas)
         {
-            Debug.Log("[LevelLoader] Asignando variables.");
+            //Debug.Log("[LevelLoader] Asignando variables.");
 
             // Aisgnar variables
             levelLoader = GameObject.Find("Panel Carga");

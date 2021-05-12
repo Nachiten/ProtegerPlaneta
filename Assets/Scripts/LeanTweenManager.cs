@@ -16,7 +16,11 @@ public class LeanTweenManager : MonoBehaviour
     public bool animacionEnEjecucion = false;
 
     static int indexActual = -1;
-    bool yaCargada = false;
+
+    static bool variablesSeteadas = false;
+
+    //bool yaCargada = false;
+    //private static readonly object inicializacionLock = new object();
 
     #endregion
 
@@ -37,11 +41,18 @@ public class LeanTweenManager : MonoBehaviour
     // Setup que se hace una sola vez
     void Awake()
     {
+        //Debug.Log("[LTManager] Awake");
+
+        if (variablesSeteadas)
+            return;
+
         // Objetos
         menu = GameObject.Find("Menu");
         menuPanel = GameObject.Find("PanelMenu");
         menuOpciones = GameObject.Find("MenuOpciones");
         menuCreditos = GameObject.Find("MenuCreditos");
+
+        //Debug.Log("[LTManager] MenuCreditos: " + menuCreditos);
 
         // Botones
         botonSalir = GameObject.Find("Salir");
@@ -50,6 +61,8 @@ public class LeanTweenManager : MonoBehaviour
 
         // Botonces condicionales
         botonVolverInicio = GameObject.Find("VolverAInicio");
+
+        variablesSeteadas = true;
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -57,19 +70,37 @@ public class LeanTweenManager : MonoBehaviour
     // Se llama cuando una nueva escena se carga
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Si es la misma escena que antes
-        if (indexActual == scene.buildIndex)
-        {
-            // Si es la misma escena recargada (la primera vez)
-            if (!yaCargada)
-                setupInicial();
-            // Si es la segunda o mas veces seguidas que quiere cargar
-            else
-                return;
-        }
-        // Si es una escena nueva, inicializo
-        else
-            setupInicial();
+        //Debug.Log("[LTManager] Llamo a OnSceneLoaded");
+
+        setupInicial();
+
+        //lock (inicializacionLock) 
+        //{
+        //    // Si es la misma escena que antes
+        //    if (indexActual == scene.buildIndex)
+        //    {
+        //        // Si es la misma escena recargada (la primera vez)
+        //        if (!yaCargada)
+        //        {
+        //            Debug.Log("[LTManager] Misma escena recargada");
+        //            yaCargada = true;
+        //            setupInicial();
+        //        }
+        //        // Si es la segunda o mas veces seguidas que quiere cargar
+        //        else
+        //        {
+        //            Debug.Log("[LTManager] Segunda o mas vez que recargo");
+        //            return;
+        //        }
+        //    }
+        //    // Si es una escena nueva, inicializo
+        //    else
+        //    {
+        //        Debug.Log("[LTManager] Escena nueva");
+        //        yaCargada = true;
+        //        setupInicial();
+        //    }
+        //} 
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -77,17 +108,17 @@ public class LeanTweenManager : MonoBehaviour
     // Setup que se hace en cada nueva escena cargada
     void setupInicial() 
     {
-        Debug.Log("[LeanTweenManager] SetupInicial");
+        //Debug.Log("[LeanTweenManager] SetupInicial");
 
-        yaCargada = true;
+        //yaCargada = true;
+
+        indexActual = SceneManager.GetActiveScene().buildIndex;
 
         botones = new List<GameObject>();
 
         botones.Add(botonSalir);
         botones.Add(botonComenzar);
         botones.Add(botonOpciones);
-
-        indexActual = SceneManager.GetActiveScene().buildIndex;
 
         if (indexActual == 0)
         {
