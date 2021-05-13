@@ -51,6 +51,7 @@ public class LeanTweenManager : MonoBehaviour
         botonSalir = GameObject.Find("Salir");
         botonComenzar = GameObject.Find("Comenzar");
         botonOpciones = GameObject.Find("Opciones");
+        botonesInicio = GameObject.Find("Botones Inicio");
 
         // Botonces condicionales
         botonVolverInicio = GameObject.Find("VolverAInicio");
@@ -75,25 +76,18 @@ public class LeanTweenManager : MonoBehaviour
 
         indexActual = SceneManager.GetActiveScene().buildIndex;
 
-        botones = new List<GameObject>();
+        botones = new List<GameObject> { botonSalir, botonComenzar, botonOpciones };
 
-        botones.Add(botonSalir);
-        botones.Add(botonComenzar);
-        botones.Add(botonOpciones);
-
+        // Si estoy en inicio
         if (indexActual == 0)
         {
-            botonCreditos = GameObject.Find("Creditos");
-            botonesInicio = GameObject.Find("Botones Inicio");
-            botonBorrarProgreso = GameObject.Find("BorrarProgreso");
-
-            botones.Add(botonBorrarProgreso);
-            botones.Add(botonCreditos);
             botonVolverInicio.SetActive(false);
+            botonesInicio.SetActive(true);
         }
         else
         {
             botones.Add(botonVolverInicio);
+            botonesInicio.SetActive(false);
         }
     }
 
@@ -216,9 +210,9 @@ public class LeanTweenManager : MonoBehaviour
 
     #region AnimacionesAbrirMenus
 
-    /* ------------------------------------------------------------------------------------ */
-    // ----------------------------- ANIMACIONES ABRIR MENUS ----------------------------- // 
-    /* ------------------------------------------------------------------------------------ */
+    /* ------------------------------------------------------------------------------------- */
+    // ------------------------------ ANIMACIONES ABRIR MENUS ------------------------------ // 
+    /* ------------------------------------------------------------------------------------- */
 
     public void abrirMenu( GameObject menuAPoner, int signo)
     {

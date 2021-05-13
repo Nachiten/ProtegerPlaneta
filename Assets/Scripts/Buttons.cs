@@ -10,9 +10,6 @@ public class Buttons : MonoBehaviour
     static ManejarMenu codigoManejarMenu;
     static SoundManager codigoSoundManager;
 
-    static bool variablesSeteadas = false;
-    private static readonly object setearVariablesLock = new object();
-
     /* -------------------------------------------------------------------------------- */
 
     void OnEnable()
@@ -38,23 +35,13 @@ public class Buttons : MonoBehaviour
     // Setup que se hace por unica vez
     void Awake()
     {
-        lock (setearVariablesLock) 
-        {
-            if (variablesSeteadas)
-                return;
-
-            codigoSoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-            codigoPopUpsMenu = GameObject.Find("Pop Up").GetComponent<PopUpsMenu>();
-
-            variablesSeteadas = true;
-        }
+        codigoSoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        codigoPopUpsMenu = GameObject.Find("Pop Up").GetComponent<PopUpsMenu>();
     }
 
     // Setup que se hace en cada nueva escena cargada
     void setupInicial() 
     {
-        //yaCargada = true;
-
         Debug.Log("[Buttons] SetupInicial");
 
         GameObject objetoGameManager = GameObject.Find("GameManager");
@@ -126,8 +113,6 @@ public class Buttons : MonoBehaviour
     /* ------------------------------------------------------------------------------------ */
     /* ------------------------------------ AUXILIARES ------------------------------------ */
     /* ------------------------------------------------------------------------------------ */
-
-    public void Salir() { codigoLevelLoader.salir(); }
 
     /* -------------------------------------------------------------------------------- */
 

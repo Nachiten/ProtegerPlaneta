@@ -69,8 +69,6 @@ public class LevelLoader : MonoBehaviour
     // Iniciar Corutina para cargar nivel en background
     IEnumerator cargarAsincronizadamente()
     {
-        Debug.Log("[LevelLoader] CargarAsincronico");
-
         // Iniciar carga de escena
         AsyncOperation operacion = SceneManager.LoadSceneAsync(indexACargar);
 
@@ -148,8 +146,6 @@ public class LevelLoader : MonoBehaviour
 
     void completarCargaNivel() 
     {
-        Debug.Log("[LevelLoader] Llamo a carga asincronica");
-
         StartCoroutine(cargarAsincronizadamente());
     }
 
