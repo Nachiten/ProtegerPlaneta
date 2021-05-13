@@ -13,8 +13,8 @@ public class SetearPuntajesRecord : MonoBehaviour
 
             TMP_Text textoRecord = GameObject.Find("TextoRecord" + i).GetComponent<TMP_Text>();
 
-            Debug.Log("[SetearPuntajesRecord] textoRecord: " + textoRecord);
-            Debug.Log("[SetearPuntajesRecord] puntajeActual: " + puntajeActual);
+            //Debug.Log("[SetearPuntajesRecord] textoRecord: " + textoRecord);
+            //Debug.Log("[SetearPuntajesRecord] puntajeActual: " + puntajeActual);
 
             textoRecord.text = puntajeActual.ToString();
         }

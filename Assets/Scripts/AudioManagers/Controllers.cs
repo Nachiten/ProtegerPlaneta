@@ -8,12 +8,16 @@ public class Controllers : MonoBehaviour
     public AudioMixer mixerMusica, mixerSonidos;
     TMP_Text textoVolumenMusica, textoVolumenSonidos;
 
+    MusicManager musicManagerCodigo;
+
     /* -------------------------------------------------------------------------------- */
 
     void Awake()
     {
         textoVolumenMusica = GameObject.Find("NumeroVolumenMusica").GetComponent<TMP_Text>();
         textoVolumenSonidos = GameObject.Find("NumeroVolumenSonidos").GetComponent<TMP_Text>();
+
+        musicManagerCodigo = GameObject.Find("MusicManager").GetComponent<MusicManager>();
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -50,11 +54,9 @@ public class Controllers : MonoBehaviour
 
     public void cambiarCancionA(int cancion)
     {
-        MusicManager musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
-
         if (cancion != 3)
-            musicManager.reproducirMusica(cancion);
+            musicManagerCodigo.reproducirMusica(cancion);
         else
-            musicManager.pararMusica();
+            musicManagerCodigo.pararMusica();
     }
 }
