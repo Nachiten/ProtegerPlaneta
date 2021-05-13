@@ -75,21 +75,14 @@ public class Controllers : MonoBehaviour
 
     /* -------------------------------------------------------------------------------- */
 
-    string numeroVolumenActual = "";
-
     public void setSoundLevel(float valorSlider)
     {
         PlayerPrefs.SetFloat("SoundLevel", valorSlider);
 
         setearValorSonido(valorSlider);
 
-        string numeroNuevoVolumen = (valorSlider * 100).ToString("F0");
-
-        if (numeroNuevoVolumen != numeroVolumenActual)
-            // Reproduzco sonido de muestra
+        if (Input.GetMouseButtonDown(0))
             GameObject.Find("SoundManager").GetComponent<SoundManager>().reproducirSonido(0);
-
-        numeroVolumenActual = numeroNuevoVolumen;
     }
 
     /* -------------------------------------------------------------------------------- */
