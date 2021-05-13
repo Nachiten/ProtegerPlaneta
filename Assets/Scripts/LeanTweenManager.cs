@@ -6,7 +6,7 @@ public class LeanTweenManager : MonoBehaviour
 {
     #region Variables
 
-    float tiempoAnimacionBotonesMenu = 0.2f, tiempoAnimacionPanelMenu = 0.15f, tiempoAnimacionMenus = 0.5f;
+    float tiempoAnimacionBotonesMenu = 0.2f, tiempoAnimacionPanelMenu = 0.15f, tiempoAnimacionMenus = 0.5f, posicionAfuera = 1920;
 
     List<GameObject> botones;
 
@@ -90,8 +90,6 @@ public class LeanTweenManager : MonoBehaviour
             botonesInicio.SetActive(false);
         }
     }
-
-    float posicionAfuera = 1920;
 
     #region AnimacionAbrirMenu
 
