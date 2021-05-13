@@ -10,8 +10,8 @@ public class LeanTweenManager : MonoBehaviour
 
     List<GameObject> botones;
 
-    static GameObject menu, menuPanel, menuOpciones, menuCreditos, menuPuntajesRecord, botonesInicio;
-    static GameObject botonComenzar, botonOpciones, botonSalir, botonVolverInicio, botonBorrarProgreso, botonCreditos;
+    static GameObject menu, menuPanel, menuOpciones, menuCreditos, menuPuntajesRecord, botonesInicio,
+                      botonComenzar, botonOpciones, botonSalir, botonVolverInicio, botonBorrarProgreso, botonCreditos;
 
     public bool animacionEnEjecucion = false;
 

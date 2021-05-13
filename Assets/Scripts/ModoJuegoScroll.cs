@@ -5,11 +5,15 @@ public class ModoJuegoScroll : MonoBehaviour
 {
     TMP_Text textoDescripcion, textoNombreModo;
 
+    /* -------------------------------------------------------------------------------- */
+
     private void Awake()
     {
         textoDescripcion = GameObject.Find("DescripcionModo").GetComponent<TMP_Text>();
         textoNombreModo = GameObject.Find("NombreModo").GetComponent<TMP_Text>();
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     public void seleccionarModoJuego(int modo) 
     {

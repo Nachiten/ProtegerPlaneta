@@ -12,7 +12,8 @@ public class PlayerBoostManager : MonoBehaviour
      
     public float radioActual = 2;
 
-    // Update is called once per frame
+    /* -------------------------------------------------------------------------------- */
+
     void Update()
     {
         if (boostAgarradoTamaño)
@@ -32,6 +33,8 @@ public class PlayerBoostManager : MonoBehaviour
         }
     }
 
+    /* -------------------------------------------------------------------------------- */
+
     public void modificarTamaño(float escalaX)
     {
         timePassedTamaño = 0;
@@ -40,6 +43,8 @@ public class PlayerBoostManager : MonoBehaviour
         cambiarEscalaX(escalaX);
     }
 
+    /* -------------------------------------------------------------------------------- */
+
     public void modificarRadio(float radio) 
     {
         timePassedRadio = 0;
@@ -47,6 +52,8 @@ public class PlayerBoostManager : MonoBehaviour
 
         fijarRadio(radio);
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     void terminarBoostTamaño()
     {
@@ -57,12 +64,16 @@ public class PlayerBoostManager : MonoBehaviour
         cambiarEscalaX(1f);
     }
 
+    /* -------------------------------------------------------------------------------- */
+
     void terminarBoostRadio() 
     {
         boostAgarradoRadio = false;
 
         fijarRadio(2);
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     void fijarRadio(float radio) 
     {
@@ -72,6 +83,8 @@ public class PlayerBoostManager : MonoBehaviour
 
         transform.localPosition = new Vector3(radio, posicionActual.y, posicionActual.z);
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     void cambiarEscalaX(float escalaX)
     {

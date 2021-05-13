@@ -10,7 +10,7 @@ public class Controllers : MonoBehaviour
 
     /* -------------------------------------------------------------------------------- */
 
-    void Start()
+    void Awake()
     {
         textoVolumenMusica = GameObject.Find("NumeroVolumenMusica").GetComponent<TMP_Text>();
         textoVolumenSonidos = GameObject.Find("NumeroVolumenSonidos").GetComponent<TMP_Text>();

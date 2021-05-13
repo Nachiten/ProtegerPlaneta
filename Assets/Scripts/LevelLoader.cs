@@ -6,39 +6,51 @@ using TMPro;
 
 public class LevelLoader : MonoBehaviour
 {
-    static GameObject levelLoader, panelCargaColor, restoPanelCarga;
+    #region Variables
+
     static Slider slider;
+    static GameObject levelLoader, panelCargaColor, restoPanelCarga;
     static TMP_Text textoProgreso, textoNivel;
 
     static bool variablesAsignadas = false;
 
     int indexACargar = 0;
 
+    #endregion
+
+    /* -------------------------------------------------------------------------------- */
+
+    #region FuncionesInicio
+
+    private void Awake()
+    {
+        if (!variablesAsignadas)
+        {
+            // Asignar variables
+            slider = GameObject.Find("Barra Carga").GetComponent<Slider>();
+            levelLoader = GameObject.Find("Panel Carga");
+            panelCargaColor = GameObject.Find("PanelColorCarga");
+            restoPanelCarga = GameObject.Find("RestoPanelCarga");
+
+            textoProgreso = GameObject.Find("TextoProgreso").GetComponent<TMP_Text>();
+            textoNivel = GameObject.Find("Texto Cargando").GetComponent<TMP_Text>();
+        }
+    }
+
     /* -------------------------------------------------------------------------------- */
 
     void Start()
     {
-        if (!variablesAsignadas)
+        if (!variablesAsignadas) 
         {
-            //Debug.Log("[LevelLoader] Asignando variables.");
-
-            // Aisgnar variables
-            levelLoader = GameObject.Find("Panel Carga");
-            textoProgreso = GameObject.Find("TextoProgreso").GetComponent<TMP_Text>();
-            slider = GameObject.Find("Barra Carga").GetComponent<Slider>();
-            panelCargaColor = GameObject.Find("PanelColorCarga");
-            restoPanelCarga = GameObject.Find("RestoPanelCarga");
-
-            textoNivel = GameObject.Find("Texto Cargando").GetComponent<TMP_Text>();
-
-            variablesAsignadas = true;
-
-            // Ocultar pantalla de carga
             levelLoader.SetActive(false);
-        }
-        else 
-            quitarPanelCarga();
+            variablesAsignadas = true;
+        } 
+        else
+            quitarPanelCarga(); 
     }
+
+    #endregion
 
     /* -------------------------------------------------------------------------------- */
 
@@ -55,19 +67,19 @@ public class LevelLoader : MonoBehaviour
     /* -------------------------------------------------------------------------------- */
 
     // Iniciar Corutina para cargar nivel en background
-    IEnumerator cargarAsincronizadamente(int index)
+    IEnumerator cargarAsincronizadamente()
     {
         Debug.Log("[LevelLoader] CargarAsincronico");
 
         // Iniciar carga de escena
-        AsyncOperation operacion = SceneManager.LoadSceneAsync(index);
+        AsyncOperation operacion = SceneManager.LoadSceneAsync(indexACargar);
 
         operacion.allowSceneActivation = true;
 
-        Debug.Log("[LevelLoader] Cargando escena: " + index);
+        Debug.Log("[LevelLoader] Cargando escena: " + indexACargar);
 
         // Desde aca si encuentra la escena correcta (no se pq)
-        string nombreEscena = SceneManager.GetSceneByBuildIndex(index).name;
+        string nombreEscena = SceneManager.GetSceneByBuildIndex(indexACargar).name;
         //Debug.Log("Escena que se carga: " + nombreEscena);
         textoNivel.text = "Cargando " + nombreEscena + " ...";
 
@@ -138,7 +150,7 @@ public class LevelLoader : MonoBehaviour
     {
         Debug.Log("[LevelLoader] Llamo a carga asincronica");
 
-        StartCoroutine(cargarAsincronizadamente(indexACargar));
+        StartCoroutine(cargarAsincronizadamente());
     }
 
     #endregion

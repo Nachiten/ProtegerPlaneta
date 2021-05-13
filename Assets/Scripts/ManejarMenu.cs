@@ -29,7 +29,7 @@ public class ManejarMenu : MonoBehaviour
 
     /* -------------------------------------------------------------------------------- */
 
-    #region FuncionStart
+    #region FuncionesInicio
 
     private void Awake()
     {
@@ -48,6 +48,8 @@ public class ManejarMenu : MonoBehaviour
             variablesAsignadas = true;
         }
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     void Start()
     {

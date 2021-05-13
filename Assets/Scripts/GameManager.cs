@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public static GameMode gameModeActual = GameMode.Normal;
 
-    private void Start()
+    private void Awake()
     {
         Debug.Log("[GameManager] Modo de juego actual: " + gameModeActual);
 
@@ -38,7 +37,10 @@ public class GameManager : MonoBehaviour
         scrollbarVida = GameObject.Find("MedidorVida").GetComponent<Slider>();
         textoPerdiste = GameObject.Find("HasPerdido");
         fillAreaScroll = GameObject.Find("FillAreaVida");
+    }
 
+    private void Start()
+    {
         ajustarVidaEnBaseADificultad();
 
         mostrarPuntos();
@@ -73,7 +75,22 @@ public class GameManager : MonoBehaviour
 
         if (noPuedePerder) 
             return;
-        
+
+        string nombrePlayerPref = "Points_" + (int)gameModeActual;
+
+        // Si los puntos ganados son mayores a los previamente guardados
+        if (puntos > PlayerPrefs.GetInt(nombrePlayerPref))
+        {
+            Debug.Log("[GameManager] Guardando player pref. Nombre: " + nombrePlayerPref + " | Puntos: " + puntos);
+
+            // Seteo una nueva player pref
+            PlayerPrefs.SetInt(nombrePlayerPref, puntos);
+        }
+        else 
+        {
+            Debug.Log("[GameManager] Player pref guardada anteriormente es mayor, no guardo.");
+        }
+
         textoPerdiste.SetActive(true);
         GetComponent<ObstacleSpawner>().perderJuego();
         GetComponent<RecolectableSpawner>().perderJuego();

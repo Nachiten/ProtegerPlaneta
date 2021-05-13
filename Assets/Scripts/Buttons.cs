@@ -44,7 +44,6 @@ public class Buttons : MonoBehaviour
                 return;
 
             codigoSoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-
             codigoPopUpsMenu = GameObject.Find("Pop Up").GetComponent<PopUpsMenu>();
 
             variablesSeteadas = true;

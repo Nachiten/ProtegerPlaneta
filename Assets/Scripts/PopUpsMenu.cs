@@ -19,11 +19,9 @@ public class PopUpsMenu : MonoBehaviour
 
     /* -------------------------------------------------------------------------------- */
 
-    void Start()
+    void Awake()
     {
-        //Debug.Log("[PopsUpsMenu] Start()");
-
-        if (!variablesSeteadas) 
+        if (!variablesSeteadas)
         {
             popUp = GameObject.Find("Pop Up");
             botonNo = GameObject.Find("Boton No");
@@ -38,6 +36,12 @@ public class PopUpsMenu : MonoBehaviour
 
             variablesSeteadas = true;
         }
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    void Start()
+    {
         popUp.SetActive(false);
     }
 
