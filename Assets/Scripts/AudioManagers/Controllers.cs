@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 using TMPro;
 
 public class Controllers : MonoBehaviour
 {
     public AudioMixer mixerMusica, mixerSonidos;
+
     TMP_Text textoVolumenMusica, textoVolumenSonidos;
 
-    MusicManager musicManagerCodigo;
+    TMP_Dropdown seleccionarMusica;
+
+    Scrollbar scrollMusica, scrollSonidos;
+
+    MusicManager musicManager;
 
     /* -------------------------------------------------------------------------------- */
 
@@ -16,26 +21,114 @@ public class Controllers : MonoBehaviour
     {
         textoVolumenMusica = GameObject.Find("NumeroVolumenMusica").GetComponent<TMP_Text>();
         textoVolumenSonidos = GameObject.Find("NumeroVolumenSonidos").GetComponent<TMP_Text>();
+        musicManager = GameObject.Find("MusicManager").GetComponent<MusicManager>();
 
-        musicManagerCodigo = GameObject.Find("MusicManager").GetComponent<MusicManager>();
+        scrollMusica = GameObject.Find("VolumenMusicaScroll").GetComponent<Scrollbar>();
+        scrollSonidos = GameObject.Find("VolumenSonidosScroll").GetComponent<Scrollbar>();
+
+        seleccionarMusica = GameObject.Find("SeleccionarMusica").GetComponent<TMP_Dropdown>();
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    void Start()
+    {
+        // Seteo la cancion elegida previamente
+        if (PlayerPrefs.HasKey("ChosenSong"))
+        {
+            int cancionElegida = PlayerPrefs.GetInt("ChosenSong");
+
+            // Si hay alguna cancion elegida, la reproduczo
+            if (cancionElegida != 0)
+                musicManager.reproducirMusica(cancionElegida - 1);
+
+            seleccionarMusica.value = cancionElegida;
+        }
+
+        // Seteo el sonido elegido previamente
+        if (PlayerPrefs.HasKey("SoundLevel"))
+        {
+            float soundLevel = PlayerPrefs.GetFloat("SoundLevel");
+
+            setearValorSonido(soundLevel);
+            scrollSonidos.value = soundLevel;
+        }
+
+        // Seteo la musica elegida previamente
+        if (PlayerPrefs.HasKey("MusicLevel"))
+        {
+            float musicLevel = PlayerPrefs.GetFloat("MusicLevel");
+
+            setearValorMusica(musicLevel);
+            scrollMusica.value = musicLevel;
+        }
     }
 
     /* -------------------------------------------------------------------------------- */
 
     public void setMusicLevel(float valorSlider)
     {
-        textoVolumenMusica.text = (valorSlider * 100).ToString("F0");
+        PlayerPrefs.SetFloat("MusicLevel", valorSlider);
 
-        valorSlider = valorSlider * 0.9999f + 0.0001f;
-
-        mixerMusica.SetFloat("Volume", Mathf.Log10 (valorSlider) * 20);
+        setearValorMusica(valorSlider);
     }
 
-    /* --------------------------------------------------------------- */
+    /* -------------------------------------------------------------------------------- */
 
     string numeroVolumenActual = "";
 
     public void setSoundLevel(float valorSlider)
+    {
+        PlayerPrefs.SetFloat("SoundLevel", valorSlider);
+
+        setearValorSonido(valorSlider);
+
+        string numeroNuevoVolumen = (valorSlider * 100).ToString("F0");
+
+        if (numeroNuevoVolumen != numeroVolumenActual)
+            // Reproduzco sonido de muestra
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().reproducirSonido(0);
+
+        numeroVolumenActual = numeroNuevoVolumen;
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    void setearValorSonido(float valorSonido)
+    {
+        textoVolumenSonidos.text = (valorSonido * 100).ToString("F0");
+
+        valorSonido = valorSonido * 0.9999f + 0.0001f;
+
+        mixerSonidos.SetFloat("Volume", Mathf.Log10(valorSonido) * 20);
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    void setearValorMusica(float valorMusica)
+    {
+        textoVolumenMusica.text = (valorMusica * 100).ToString("F0");
+
+        valorMusica = valorMusica * 0.9999f + 0.0001f;
+
+        mixerMusica.SetFloat("Volume", Mathf.Log10(valorMusica) * 20);
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    public void cambiarCancionA(int cancion)
+    {
+        PlayerPrefs.SetInt("ChosenSong", cancion);
+
+        if (cancion != 0)
+            musicManager.reproducirMusica(cancion - 1);
+        else
+            musicManager.pararMusica();
+    }
+}
+
+/*
+public void setSoundLevel(float valorSlider)
     {
         string numeroNuevoVolumen = (valorSlider * 100).ToString("F0");
 
@@ -51,12 +144,4 @@ public class Controllers : MonoBehaviour
 
         mixerSonidos.SetFloat("Volume", Mathf.Log10(valorSlider) * 20);
     }
-
-    public void cambiarCancionA(int cancion)
-    {
-        if (cancion != 3)
-            musicManagerCodigo.reproducirMusica(cancion);
-        else
-            musicManagerCodigo.pararMusica();
-    }
-}
+*/

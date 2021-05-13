@@ -5969,7 +5969,7 @@ GameObject:
   - component: {fileID: 7226808555511271838}
   - component: {fileID: 7226808555511271839}
   m_Layer: 5
-  m_Name: Volumen Scroll
+  m_Name: VolumenSonidosScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6727,7 +6727,7 @@ GameObject:
   - component: {fileID: 7226808555727720813}
   - component: {fileID: 7226808555727720814}
   m_Layer: 5
-  m_Name: Volumen Scroll
+  m_Name: VolumenMusicaScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8545,16 +8545,16 @@ MonoBehaviour:
   m_Placeholder: {fileID: 0}
   m_ItemText: {fileID: 7226808556287272883}
   m_ItemImage: {fileID: 0}
-  m_Value: 3
+  m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: Ninguna
+      m_Image: {fileID: 0}
     - m_Text: Electro-Cumbia
       m_Image: {fileID: 0}
     - m_Text: Noise Trip
       m_Image: {fileID: 0}
     - m_Text: Sidechain Madness
-      m_Image: {fileID: 0}
-    - m_Text: Ninguna
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
