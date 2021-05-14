@@ -99,7 +99,7 @@ public class MovimientoObstaculo : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Jugador")) 
         {
-            Debug.Log("Sumaste un punto!!");
+            //Debug.Log("Sumaste un punto!!");
             codigoGameManager.sumarPuntos(1);
             
         }

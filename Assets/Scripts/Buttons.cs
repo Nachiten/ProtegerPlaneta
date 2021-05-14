@@ -42,7 +42,7 @@ public class Buttons : MonoBehaviour
     // Setup que se hace en cada nueva escena cargada
     void setupInicial() 
     {
-        Debug.Log("[Buttons] SetupInicial");
+        //Debug.Log("[Buttons] SetupInicial");
 
         GameObject objetoGameManager = GameObject.Find("GameManager");
 

@@ -14,20 +14,20 @@ public enum GameMode
 public class GameManager : MonoBehaviour
 {
     public bool noPuedePerder = false;
+
     int puntos = 0;
-    float vidaActual = 10f;
 
-    float vidaTotal = 10f;
-
-    TMP_Text textoPuntos;
+    float vidaActual = 10f, vidaTotal = 10f;
 
     Slider scrollbarVida;
-
+    TMP_Text textoPuntos;
     GameObject textoPerdiste, fillAreaScroll;
+
+    public static GameMode gameModeActual = GameMode.Normal;
 
     Func<bool> funcionPerdiJuego = null;
 
-    public static GameMode gameModeActual = GameMode.Normal;
+    bool perdio = false;
 
     private void Awake()
     {
@@ -69,8 +69,10 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    void perderJuego() 
+    public void perderJuego() 
     {
+        perdio = true;
+
         fillAreaScroll.SetActive(false);
 
         if (noPuedePerder) 
@@ -106,7 +108,7 @@ public class GameManager : MonoBehaviour
         vidaActual = Mathf.Max(vidaActual - daño, 0f);
         mostrarVida();
 
-        if (funcionPerdiJuego())
+        if (funcionPerdiJuego() && !perdio)
             perderJuego();
     }
 
@@ -121,9 +123,9 @@ public class GameManager : MonoBehaviour
         scrollbarVida.value = vidaActual / vidaTotal;
     }
 
-    /* -------------------------------------------------------------------------------- */
-    /* ------------------------------------ PUNTOS ------------------------------------ */
-    /* -------------------------------------------------------------------------------- */
+    /* ------------------------------------------------------------------------------------ */
+    /* -------------------------------------- PUNTOS -------------------------------------- */
+    /* ------------------------------------------------------------------------------------ */
 
     public void sumarPuntos(int puntos)
     {

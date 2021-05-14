@@ -57,8 +57,6 @@ public class PlayerBoostManager : MonoBehaviour
 
     void terminarBoostTamaño()
     {
-        Debug.Log("TerminarBoost");
-
         boostAgarradoTamaño = false;
 
         cambiarEscalaX(1f);

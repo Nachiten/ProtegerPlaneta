@@ -72,7 +72,7 @@ public class LeanTweenManager : MonoBehaviour
     // Setup que se hace en cada nueva escena cargada
     void setupInicial() 
     {
-        Debug.Log("[LeanTweenManager] SetupInicial");
+        //Debug.Log("[LeanTweenManager] SetupInicial");
 
         indexActual = SceneManager.GetActiveScene().buildIndex;
 

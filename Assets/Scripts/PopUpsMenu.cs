@@ -139,18 +139,12 @@ public class PopUpsMenu : MonoBehaviour
                 else
                     abrirPopUp(2);
                 
-
-                break;
-            case 1:
-                GameObject.Find("GameManager").GetComponent<LevelLoader>().cargarNivel(0);
-
                 break;
             case 3:
                 if (accionUsada)
                     GameObject.Find("GameManager").GetComponent<LevelLoader>().salir();
 
                 break;
-
         }
     }
 }

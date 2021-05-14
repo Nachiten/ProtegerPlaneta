@@ -119,22 +119,3 @@ public class Controllers : MonoBehaviour
             musicManager.pararMusica();
     }
 }
-
-/*
-public void setSoundLevel(float valorSlider)
-    {
-        string numeroNuevoVolumen = (valorSlider * 100).ToString("F0");
-
-        if (numeroNuevoVolumen != numeroVolumenActual)
-            // Reproduzco sonido de muestra
-            GameObject.Find("SoundManager").GetComponent<SoundManager>().reproducirSonido(0);
-
-        numeroVolumenActual = numeroNuevoVolumen;
-
-        textoVolumenSonidos.text = numeroNuevoVolumen;
-
-        valorSlider = valorSlider * 0.9999f + 0.0001f;
-
-        mixerSonidos.SetFloat("Volume", Mathf.Log10(valorSlider) * 20);
-    }
-*/
