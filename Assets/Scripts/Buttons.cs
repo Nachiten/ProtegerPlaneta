@@ -10,6 +10,8 @@ public class Buttons : MonoBehaviour
     static ManejarMenu codigoManejarMenu;
     static SoundManager codigoSoundManager;
 
+    #region OnSceneLoaded
+
     /* -------------------------------------------------------------------------------- */
 
     void OnEnable()
@@ -29,6 +31,8 @@ public class Buttons : MonoBehaviour
     {
         setupInicial();
     }
+
+    #endregion
 
     /* -------------------------------------------------------------------------------- */
 
@@ -114,13 +118,19 @@ public class Buttons : MonoBehaviour
     /* ------------------------------------ AUXILIARES ------------------------------------ */
     /* ------------------------------------------------------------------------------------ */
 
-    /* -------------------------------------------------------------------------------- */
+    /* ------------------------------------------------------------------------------------ */
 
-    public void loadLevel(int index) { codigoLevelLoader.cargarNivel(index); }
+    public void loadLevel(int index) 
+    {
+        codigoLevelLoader = GameObject.Find("GameManager").GetComponent<LevelLoader>();
 
-    /* -------------------------------------------------------------------------------- */
+        codigoLevelLoader.cargarNivel(index); 
+    
+    }
+
+    /* ------------------------------------------------------------------------------------ */
 
     void reproducirSonidoClickBoton() { codigoSoundManager.reproducirSonido(1); }
 
-    /* -------------------------------------------------------------------------------- */
+    /* ------------------------------------------------------------------------------------ */
 }

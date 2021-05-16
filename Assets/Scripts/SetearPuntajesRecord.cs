@@ -5,7 +5,6 @@ public class SetearPuntajesRecord : MonoBehaviour
 {
     private void OnEnable()
     {
-        Debug.Log("[SetearPuntajesRecord] OnEnable");
         setearPuntajesRecord();
     }
     

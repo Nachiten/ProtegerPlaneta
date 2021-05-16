@@ -4,15 +4,15 @@
 #define MyAppVersion "Alpha3.0"
 #define MyAppName "ProtegerPlaneta" + MyAppVersion
 #define MyAppPublisher "Nachiten"
-#define MyAppURL "https://www.youtube.com/channel/UCIaYoKyvFB6ubQSYFQ6EISg"
+#define MyAppURL "https://www.youtube.com/c/NachitenRemix"
 #define MyAppExeName "ProtegerPlaneta.exe"
 #define MyAppAssocName MyAppName
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 ; PATH EN PC ESCRITORIO
-; #define PathProyecto "D:\Programas Unity\ProtegerPlaneta" 
+#define PathProyecto "D:\Programas Unity\ProtegerPlaneta" 
 ; PATH EN NOTEBOOK
-#define PathProyecto "C:\Programas Unity\ProtegerPlaneta" 
+; #define PathProyecto "C:\Programas Unity\ProtegerPlaneta" 
 
 
 [Setup]
