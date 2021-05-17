@@ -23,7 +23,7 @@ Un juego en el que uno es un objeto que gira al rededor de un planeta y debe pro
 *Versión 2.0* [EN DESARROLLO]: 
 - [Fix] Funcionamiento correcto de la UI durante el juego.
 - [Fix] Funcionamiento correcto del menu de pausa durante el juego.
-
+- [Fix] Solo se soporta posicion horizontal en celular.
 
 # TODOs
 - Corregir UI para evitar bug dentro del juego.
