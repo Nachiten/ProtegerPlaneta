@@ -1,11 +1,13 @@
 # ProtegerPlaneta
 Un juego en el que uno es un objeto que gira al rededor de un planeta y debe protegerlo de obstaculos hostiles.
 
+
 # Glosario
 - [Fix] Reparacion de un Bug.
 - [New] Nuevo feature.
 - [Rmv] Feature removido.
 - [Mod] Modificación de un feature existente.
+
 
 # Changelog
 *Versión 1.0* : 
@@ -19,6 +21,7 @@ Un juego en el que uno es un objeto que gira al rededor de un planeta y debe pro
 - [New] Menu inicio completo con Opciones, Creditos, Puntajes Record.
 
 *Versión 2.0* [EN DESARROLLO]: 
+- [Fix] Funcionamiento correcto de la UI durante el juego.
 - [Fix] Funcionamiento correcto del menu de pausa durante el juego.
 
 

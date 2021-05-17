@@ -6,14 +6,15 @@ public class LeanTweenManager : MonoBehaviour
 {
     #region Variables
 
+    [HideInInspector]
+    public bool animacionEnEjecucion = false;
+
     float tiempoAnimacionBotonesMenu = 0.2f, tiempoAnimacionPanelMenu = 0.15f, tiempoAnimacionMenus = 0.5f, posicionAfuera = 1920;
 
     List<GameObject> botones;
 
     static GameObject menu, menuPanel, menuOpciones, menuCreditos, menuPuntajesRecord, botonesInicio,
                       botonComenzar, botonOpciones, botonSalir, botonVolverInicio, botonBorrarProgreso, botonCreditos;
-
-    public bool animacionEnEjecucion = false;
 
     static int indexActual = -1;
     static bool variablesSeteadas = false;
