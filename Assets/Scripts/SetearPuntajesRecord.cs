@@ -7,7 +7,9 @@ public class SetearPuntajesRecord : MonoBehaviour
     {
         setearPuntajesRecord();
     }
-    
+
+    /* -------------------------------------------------------------------------------- */
+
     void setearPuntajesRecord() 
     {
         Debug.Log("[SetearPuntajesRecord] Seteando puntajes record...");
@@ -18,14 +20,7 @@ public class SetearPuntajesRecord : MonoBehaviour
 
             int puntajeActual = PlayerPrefs.GetInt(nombrePlayerPref);
 
-            //Debug.Log("[SetearPuntajesRecord] puntajeActual: " + puntajeActual + " | i: " + i);
-
-            //GameObject objetoTexto = GameObject.Find("TextoRecord" + i);
-            //objetoTexto.SetActive(true);
-
             TMP_Text textoRecord = GameObject.Find("TextoRecord" + i).GetComponent<TMP_Text>();
-
-            //Debug.Log("[SetearPuntajesRecord] textoRecord: " + textoRecord);
 
             textoRecord.text = puntajeActual.ToString();
         }

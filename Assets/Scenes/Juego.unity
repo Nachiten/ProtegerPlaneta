@@ -484,18 +484,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.997406, y: 3.021216}
+  m_Offset: {x: 0.008614659, y: -0.005309798}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.99, y: 8}
+    oldSize: {x: 3.14, y: 1.27}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3887892, y: 0.6134548}
+  m_Size: {x: 2.3753083, y: 0.49343735}
   m_EdgeRadius: 0
 --- !u!114 &159819991
 MonoBehaviour:
@@ -569,8 +569,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159819989}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 6.77, y: 2.77, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
+  m_LocalPosition: {x: 2.65, y: -0, z: 0}
+  m_LocalScale: {x: 0.68, y: 0.68, z: 1}
   m_Children: []
   m_Father: {fileID: 768827896}
   m_RootOrder: 0
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 293036535}
   - component: {fileID: 293036534}
   m_Layer: 5
-  m_Name: Fill
+  m_Name: RellenoSliderVida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.3254717, b: 0.3254717, a: 1}
+  m_Color: {r: 1, g: 0.5294118, b: 0.5294118, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

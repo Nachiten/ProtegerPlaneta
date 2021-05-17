@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     float vidaActual = 10f, vidaTotal = 10f;
 
     Slider scrollbarVida;
+    Image rellenoSlider;
     TMP_Text textoPuntos;
     GameObject textoPerdiste, fillAreaScroll;
 
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     bool perdio = false;
 
+    /* -------------------------------------------------------------------------------- */
+
     private void Awake()
     {
         Debug.Log("[GameManager] Modo de juego actual: " + gameModeActual);
@@ -37,7 +40,10 @@ public class GameManager : MonoBehaviour
         scrollbarVida = GameObject.Find("MedidorVida").GetComponent<Slider>();
         textoPerdiste = GameObject.Find("HasPerdido");
         fillAreaScroll = GameObject.Find("FillAreaVida");
+        rellenoSlider = GameObject.Find("RellenoSliderVida").GetComponent<Image>();
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     private void Start()
     {
@@ -68,6 +74,8 @@ public class GameManager : MonoBehaviour
     {
         return true;
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     public void perderJuego() 
     {
@@ -118,9 +126,14 @@ public class GameManager : MonoBehaviour
         mostrarVida();
     }
 
+    float factor = 0.4f; // 0.49f
+
     void mostrarVida() 
     {
-        scrollbarVida.value = vidaActual / vidaTotal;
+        float valorVida = vidaActual / vidaTotal;
+
+        scrollbarVida.value = valorVida;
+        rellenoSlider.color = new Color(1, valorVida * factor, valorVida * factor, 1);
     }
 
     /* ------------------------------------------------------------------------------------ */

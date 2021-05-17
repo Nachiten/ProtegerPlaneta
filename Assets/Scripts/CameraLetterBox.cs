@@ -4,7 +4,10 @@ public class CameraLetterBox : MonoBehaviour
 {
     public Camera backgroundCam;
     public Camera mainCam;
+
     public float targetAspectRatio = 1f;
+
+    /* -------------------------------------------------------------------------------- */
 
     private void Start()
     {
@@ -14,6 +17,7 @@ public class CameraLetterBox : MonoBehaviour
             if (mainCam == null)
                 mainCam = GetComponent<Camera>();
         }
+
         if (backgroundCam == null)
         {
             foreach (var cam in Camera.allCameras)
@@ -24,19 +28,26 @@ public class CameraLetterBox : MonoBehaviour
                     break;
                 }
             }
+
             if (backgroundCam == null)
             {
                 backgroundCam = new GameObject("BackgroundCam").AddComponent<Camera>();
             }
+
             backgroundCam.depth = mainCam.depth - 1;
         }
     }
+
+    /* -------------------------------------------------------------------------------- */
+
     private void Update()
     {
         float w = Screen.width;
         float h = Screen.height;
         float a = w / h;
+
         Rect r;
+
         if (a > targetAspectRatio)
         {
             float tw = h * targetAspectRatio;
@@ -49,6 +60,7 @@ public class CameraLetterBox : MonoBehaviour
             float o = (h - th) * 0.5f;
             r = new Rect(0, o, w, th);
         }
+
         mainCam.pixelRect = r;
     }
 }

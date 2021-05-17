@@ -7,9 +7,8 @@ public class RecolectableBoostAcercar : ARecolectableSpriteManager
         if (!collision.gameObject.CompareTag("Jugador"))
             return;
 
-        playerBoostManager.modificarRadio(1.3f);
+        playerBoostManager.modificarRadio(1.7f);
 
         transform.parent.gameObject.SetActive(false);
-
     }
 }

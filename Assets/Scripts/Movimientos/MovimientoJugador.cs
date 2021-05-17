@@ -9,6 +9,13 @@ public class MovimientoJugador : MonoBehaviour
 
     GameMode gameModeActual;
 
+    float speedReloj = 0.7f;
+    float timePassed = 0;
+    float intervaloAparicion = 4f;
+    float aumentoVelocidad = 0.05f;
+
+    /* -------------------------------------------------------------------------------- */
+
     void Awake()
     {
         gameModeActual = GameObject.Find("GameManager").GetComponent<GameManager>().obtenerGameMode();
@@ -31,6 +38,8 @@ public class MovimientoJugador : MonoBehaviour
                 break;
         }
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     void Update()
     {
@@ -57,10 +66,7 @@ public class MovimientoJugador : MonoBehaviour
         ejecutarReloj();
     }
 
-    float speedReloj = 0.7f;
-    float timePassed = 0;
-    float intervaloAparicion = 4f;
-    float aumentoVelocidad = 0.05f;
+    /* -------------------------------------------------------------------------------- */
 
     void ejecutarReloj() 
     {
@@ -77,29 +83,27 @@ public class MovimientoJugador : MonoBehaviour
 
     }
 
+    /* -------------------------------------------------------------------------------- */
+
     bool clickeoDerechaPantalla() 
     {
-        if (!Input.GetMouseButton(0))
-            return false;
-
-        return Input.mousePosition.x >= Screen.width / 2;
+        // Si hizo click en la parte derecha de la pantalla
+        return Input.mousePosition.x >= Screen.width / 2 && Input.GetMouseButton(0);
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     bool clickeoIzquierdaPantalla() 
     {
-        if (!Input.GetMouseButton(0))
-            return false;
-
-        return Input.mousePosition.x <= Screen.width / 2;
+        // Si hizo click en la parte izquierda de la pantalla
+        return Input.mousePosition.x <= Screen.width / 2 && Input.GetMouseButton(0);
     }
 
-    public void aumentarSpeed(float aumento) 
-    {
-        speedRotacion += aumento;
-    }
+    /* -------------------------------------------------------------------------------- */
 
-    public void perderJuego() 
-    {
-        perdio = true;
-    }
+    public void aumentarSpeed(float aumento)  { speedRotacion += aumento; }
+
+    /* -------------------------------------------------------------------------------- */
+
+    public void perderJuego()  { perdio = true; }
 }

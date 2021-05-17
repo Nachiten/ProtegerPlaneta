@@ -7,9 +7,8 @@ public class RecolectableBuffAchicar : ARecolectableSpriteManager
         if (!collision.gameObject.CompareTag("Jugador"))
             return;
 
-        playerBoostManager.modificarTamaño(0.4f);
+        playerBoostManager.modificarTamaño(0.35f);
 
         transform.parent.gameObject.SetActive(false);
-
     }
 }

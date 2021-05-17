@@ -6,6 +6,8 @@ public class RecolectableManager : MonoBehaviour
 
     float velocidad = 0.5f;
 
+    /* -------------------------------------------------------------------------------- */
+
     void OnEnable()
     {
         transform.position = new Vector3(0,0,0);

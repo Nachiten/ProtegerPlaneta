@@ -7,7 +7,7 @@ public class RecolectableBuffAlejar : ARecolectableSpriteManager
         if (!collision.gameObject.CompareTag("Jugador"))
             return;
 
-        playerBoostManager.modificarRadio(2.7f);
+        playerBoostManager.modificarRadio(3.4f);
 
         transform.parent.gameObject.SetActive(false);
     }

@@ -4,10 +4,14 @@ public class RecolectableBoostVida : ARecolectableSpriteManager
 {
     GameManager codigoGameManager;
 
+    /* -------------------------------------------------------------------------------- */
+
     void Awake() 
     {
         codigoGameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     private void OnTriggerStay2D(Collider2D collision)
     {

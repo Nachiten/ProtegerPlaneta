@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class PlayerBoostManager : MonoBehaviour
 {
-    float timePassedTamaño = 0;
+    float tiempoPasadoTamaño = 0;
     bool boostAgarradoTamaño = false;
 
-    float timePassedRadio = 0;
+    float tiempoPasadoRadio = 0;
     bool boostAgarradoRadio = false;
 
-    float duracionBoost = 7f;
-     
+    float duracionBoost = 7.5f;
+    float duracionAnimacion = 0.25f;
+
     public float radioActual = 2;
 
     /* -------------------------------------------------------------------------------- */
@@ -18,39 +19,39 @@ public class PlayerBoostManager : MonoBehaviour
     {
         if (boostAgarradoTamaño)
         {
-            timePassedTamaño += Time.deltaTime;
+            tiempoPasadoTamaño += Time.deltaTime;
 
-            if (timePassedTamaño >= duracionBoost)
+            if (tiempoPasadoTamaño >= duracionBoost)
                 terminarBoostTamaño();
         }
 
         if (boostAgarradoRadio)
         {
-            timePassedRadio += Time.deltaTime;
+            tiempoPasadoRadio += Time.deltaTime;
 
-            if (timePassedRadio >= duracionBoost)
+            if (tiempoPasadoRadio >= duracionBoost)
                 terminarBoostRadio();
         }
     }
 
     /* -------------------------------------------------------------------------------- */
 
-    public void modificarTamaño(float escalaX)
+    public void modificarTamaño(float escala)
     {
-        timePassedTamaño = 0;
+        tiempoPasadoTamaño = 0;
         boostAgarradoTamaño = true;
 
-        cambiarEscalaX(escalaX);
+        cambiarTamaño(escala);
     }
 
     /* -------------------------------------------------------------------------------- */
 
-    public void modificarRadio(float radio) 
+    public void modificarRadio(float radio)
     {
-        timePassedRadio = 0;
+        tiempoPasadoRadio = 0;
         boostAgarradoRadio = true;
 
-        fijarRadio(radio);
+        cambiarRadio(radio);
     }
 
     /* -------------------------------------------------------------------------------- */
@@ -59,35 +60,34 @@ public class PlayerBoostManager : MonoBehaviour
     {
         boostAgarradoTamaño = false;
 
-        cambiarEscalaX(1f);
+        cambiarTamaño(0.68f);
     }
 
     /* -------------------------------------------------------------------------------- */
 
-    void terminarBoostRadio() 
+    void terminarBoostRadio()
     {
         boostAgarradoRadio = false;
 
-        fijarRadio(2);
+        cambiarRadio(2.65f);
     }
 
     /* -------------------------------------------------------------------------------- */
 
-    void fijarRadio(float radio) 
+    void cambiarTamaño(float escala)
+    {
+        LeanTween.scale(gameObject, new Vector3(escala, escala, 1), duracionAnimacion);
+    }
+
+    /* -------------------------------------------------------------------------------- */
+
+    void cambiarRadio(float radio)
     {
         radioActual = radio;
 
         Vector3 posicionActual = transform.localPosition;
 
-        transform.localPosition = new Vector3(radio, posicionActual.y, posicionActual.z);
-    }
-
-    /* -------------------------------------------------------------------------------- */
-
-    void cambiarEscalaX(float escalaX)
-    {
-        Vector3 tamañoActual = transform.localScale;
-
-        transform.localScale = new Vector3(escalaX, tamañoActual.y, tamañoActual.z);
+        LeanTween.moveLocal(gameObject, new Vector3(radio, posicionActual.y, posicionActual.z), duracionAnimacion);
     }
 }
+

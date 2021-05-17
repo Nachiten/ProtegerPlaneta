@@ -7,7 +7,7 @@ public class RecolectableBoostAgrandar : ARecolectableSpriteManager
         if (!collision.gameObject.CompareTag("Jugador"))
             return;
 
-        playerBoostManager.modificarTamaño(1.55f);
+        playerBoostManager.modificarTamaño(1f);
 
         transform.parent.gameObject.SetActive(false);
     }

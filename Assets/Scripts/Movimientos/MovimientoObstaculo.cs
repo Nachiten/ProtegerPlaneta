@@ -15,6 +15,8 @@ public class MovimientoObstaculo : MonoBehaviour
 
     static int contrarioAUltimaAparicion = -1;
 
+    /* -------------------------------------------------------------------------------- */
+
     void Awake()
     {
         planeta = GameObject.Find("Planeta");
@@ -27,6 +29,8 @@ public class MovimientoObstaculo : MonoBehaviour
         if (noPerder)
             Debug.LogError("[MovimientoObstaculo] NO SE PERMITE PERDER!!");
     }
+
+    /* -------------------------------------------------------------------------------- */
 
     private void OnEnable()
     {
@@ -80,30 +84,28 @@ public class MovimientoObstaculo : MonoBehaviour
         // Fijo velocidad
         GetComponent<Rigidbody2D>().velocity = transform.right.normalized * speed;
 
+        // Roto 90 grados
         transform.Rotate(new Vector3(0,0,-90));
     }
 
+    /* -------------------------------------------------------------------------------- */
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Planeta"))
+        if (collision.CompareTag("Planeta"))
         {
             if (noPerder) 
             {
                 spawnerObstaculos.ocultarObstaculo(gameObject);
                 return;
-            }
-                    
+            }      
+
             codigoGameManager.perderVida(daño);
-            
         }
 
-        if (collision.gameObject.CompareTag("Jugador")) 
-        {
-            //Debug.Log("Sumaste un punto!!");
+        if (collision.CompareTag("Jugador")) 
             codigoGameManager.sumarPuntos(1);
-            
-        }
-
+        
         spawnerObstaculos.ocultarObstaculo(gameObject);
     }
 }
