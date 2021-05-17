@@ -18,6 +18,10 @@ Un juego en el que uno es un objeto que gira al rededor de un planeta y debe pro
 - [New] Fondo gradiente con estrellas.
 - [New] Menu inicio completo con Opciones, Creditos, Puntajes Record.
 
+*Versión 2.0* [EN DESARROLLO]: 
+- [Fix] Funcionamiento correcto del menu de pausa durante el juego.
+
+
 # TODOs
 - Corregir UI para evitar bug dentro del juego.
 - Manejar correctamente la pausa al abrir el menu.
