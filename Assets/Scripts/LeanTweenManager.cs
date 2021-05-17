@@ -202,6 +202,9 @@ public class LeanTweenManager : MonoBehaviour
     {
         animacionEnEjecucion = false;
         menu.SetActive(false);
+
+        // Reanudo el juego desde manejar menu
+        GameObject.Find("GameManager").GetComponent<ManejarMenu>().reanudarJuego();
     }
 
     #endregion

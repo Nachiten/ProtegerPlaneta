@@ -7,6 +7,8 @@ public class RecolectableSpawner : MonoBehaviour
 
     List<Recolectable> recolectables;
 
+    bool pausa = false;
+
     private void Start()
     {
         recolectables = new List<Recolectable>();
@@ -20,7 +22,7 @@ public class RecolectableSpawner : MonoBehaviour
 
     void Update()
     {
-        if (perdio)
+        if (perdio || pausa)
             return;
 
         foreach (Recolectable unRecolectable in recolectables) 
@@ -30,5 +32,13 @@ public class RecolectableSpawner : MonoBehaviour
     public void perderJuego()
     {
         perdio = true;
+    }
+
+    public void manejarPausaRecolectables()
+    {
+        pausa = !pausa;
+
+        foreach (Recolectable unRecolectable in recolectables)
+            unRecolectable.manejarPausa();
     }
 }

@@ -14,6 +14,8 @@ public class MovimientoJugador : MonoBehaviour
     float intervaloAparicion = 4f;
     float aumentoVelocidad = 0.05f;
 
+    bool pausa = false;
+
     /* -------------------------------------------------------------------------------- */
 
     void Awake()
@@ -43,7 +45,7 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
-        if (perdio)
+        if (perdio || pausa)
             return;
 
         int signoRotacion = 0;
@@ -106,4 +108,6 @@ public class MovimientoJugador : MonoBehaviour
     /* -------------------------------------------------------------------------------- */
 
     public void perderJuego()  { perdio = true; }
+
+    public void manejarPausa() { pausa = !pausa; }
 }

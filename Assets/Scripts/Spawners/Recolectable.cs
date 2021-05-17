@@ -11,6 +11,8 @@ public class Recolectable
 
     float randomMin; float randomMax;
 
+    bool pausa = false;
+
     public Recolectable(GameObject objetoRecolectable, float randomMin, float randomMax) 
     {
         this.randomMin = randomMin;
@@ -55,5 +57,12 @@ public class Recolectable
     void fijarIntervaloAparicion()
     {
         intervaloAparicion = Random.Range(randomMin, randomMax);
+    }
+
+    public void manejarPausa()
+    {
+        pausa = !pausa;
+
+        objetoRecolectable.GetComponent<RecolectableManager>().manejarPausa();
     }
 }

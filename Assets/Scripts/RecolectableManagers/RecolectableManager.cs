@@ -6,6 +6,10 @@ public class RecolectableManager : MonoBehaviour
 
     float velocidad = 0.5f;
 
+    bool pausa = false;
+
+    Vector2 velocidadActual;
+
     /* -------------------------------------------------------------------------------- */
 
     void OnEnable()
@@ -19,6 +23,19 @@ public class RecolectableManager : MonoBehaviour
 
         transform.right = guia.transform.position - transform.position;
 
-        GetComponent<Rigidbody2D>().velocity = -transform.right.normalized * velocidad;
+        velocidadActual = -transform.right.normalized * velocidad;
+
+        GetComponent<Rigidbody2D>().velocity = velocidadActual;
+    }
+
+    public void manejarPausa() 
+    {
+        pausa = !pausa;
+
+        if (pausa)
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        else
+            GetComponent<Rigidbody2D>().velocity = velocidadActual;
+
     }
 }

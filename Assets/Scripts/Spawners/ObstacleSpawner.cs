@@ -15,6 +15,8 @@ public class ObstacleSpawner : MonoBehaviour
 
     static GameMode gameModeActual;
 
+    bool pausa = false;
+
     void Start()
     {
         gameModeActual = GameObject.Find("GameManager").GetComponent<GameManager>().obtenerGameMode();
@@ -49,7 +51,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     void Update()
     {
-        if (perdio)
+        if (perdio || pausa)
             return;
 
         foreach (Obstaculo unObstaculo in obstaculos)
@@ -65,5 +67,13 @@ public class ObstacleSpawner : MonoBehaviour
     {
         foreach (Obstaculo unObstaculoObjeto in obstaculos)
             unObstaculoObjeto.ocultarObstaculo(unObstaculo);
+    }
+
+    public void manejarPausaObstaculos() 
+    {
+        pausa = !pausa;
+
+        foreach (Obstaculo unObstaculo in obstaculos)
+            unObstaculo.manejarPausa();
     }
 }

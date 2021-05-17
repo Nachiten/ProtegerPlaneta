@@ -20,6 +20,8 @@ public class Obstaculo
     GameObject obstaclePrefab;
     GameObject obstaculoParent;
 
+    bool pausa = false;
+
     private readonly object lockListas = new object();
 
     public Obstaculo(float intervaloAparicion, float aumentoVelocidad, float speedObstaculo,  GameObject obstaclePrefab, float daño) 
@@ -79,6 +81,17 @@ public class Obstaculo
 
             mostrarObstaculo();
         }
+    }
+
+    public void manejarPausa() 
+    {
+        pausa = !pausa;
+
+        lock (lockListas)
+        {
+            foreach (GameObject unObstaculo in obstaculosSpawneados)
+                unObstaculo.GetComponent<MovimientoObstaculo>().manejarPausa();
+        }  
     }
 
     void mostrarObstaculo()

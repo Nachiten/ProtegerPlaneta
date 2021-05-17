@@ -98,7 +98,7 @@ public class ManejarMenu : MonoBehaviour
 
     /* -------------------------------------------------------------------------------- */
 
-    public void manejarMenu() 
+    public void manejarMenu()
     {
         menuActivo = !menuActivo;
 
@@ -107,15 +107,32 @@ public class ManejarMenu : MonoBehaviour
             menu.SetActive(true);
             tweenManager.abrirMenu();
         }
-        else 
+        else
             tweenManager.cerrarMenu();
-        
 
-        if (opcionesActivas) 
+        if (index != 0 && menuActivo)
+        {
+            manejarPausaObjetos();
+        }
+
+        if (opcionesActivas)
         {
             tweenManager.cerrarOpciones();
             opcionesActivas = false;
         }
+    }
+
+    public void reanudarJuego() 
+    {
+        manejarPausaObjetos();
+    }
+
+    void manejarPausaObjetos()
+    {
+        GetComponent<ObstacleSpawner>().manejarPausaObstaculos();
+        GetComponent<RecolectableSpawner>().manejarPausaRecolectables();
+
+        GameObject.Find("Jugador").GetComponent<MovimientoJugador>().manejarPausa();
     }
 
     /* -------------------------------------------------------------------------------- */

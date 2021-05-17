@@ -13,6 +13,10 @@ public class MovimientoObstaculo : MonoBehaviour
 
     float posInicialMax = 7f;
 
+    bool pausa = false;
+
+    Vector2 velocidadActual;
+
     static int contrarioAUltimaAparicion = -1;
 
     /* -------------------------------------------------------------------------------- */
@@ -81,8 +85,10 @@ public class MovimientoObstaculo : MonoBehaviour
         // Hago que el obstaculo mire hacia el planeta
         transform.right = planeta.transform.position - transform.position;
 
+        velocidadActual = transform.right.normalized * speed;
+
         // Fijo velocidad
-        GetComponent<Rigidbody2D>().velocity = transform.right.normalized * speed;
+        GetComponent<Rigidbody2D>().velocity = velocidadActual;
 
         // Roto 90 grados
         transform.Rotate(new Vector3(0,0,-90));
@@ -107,5 +113,16 @@ public class MovimientoObstaculo : MonoBehaviour
             codigoGameManager.sumarPuntos(1);
         
         spawnerObstaculos.ocultarObstaculo(gameObject);
+    }
+
+    public void manejarPausa()
+    {
+        pausa = !pausa;
+
+        if (pausa)
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        else
+            GetComponent<Rigidbody2D>().velocity = velocidadActual;
+
     }
 }
