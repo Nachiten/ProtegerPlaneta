@@ -17,3 +17,7 @@ Un juego en el que uno es un objeto que gira al rededor de un planeta y debe pro
 - [New] Color de barra de vida cambia dinamicamente en base a vida restante.
 - [New] Fondo gradiente con estrellas.
 - [New] Menu inicio completo con Opciones, Creditos, Puntajes Record.
+
+# TODOs
+- Corregir UI para evitar bug dentro del juego.
+- Manejar correctamente la pausa al abrir el menu.
