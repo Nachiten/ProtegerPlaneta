@@ -21,6 +21,7 @@ Un juego en el que uno es un objeto que gira al rededor de un planeta y debe pro
 - [New] Menu inicio completo con Opciones, Creditos, Puntajes Record.
 
 *Versión 2.0* [EN DESARROLLO]: 
+- [Fix] Corregidas inconsistencias de colores en UI.
 - [Fix] Funcionamiento correcto de la UI durante el juego.
+- [Fix] Agrandados textos de UI y movidos para mejorar legilibilidad.
 - [Fix] Funcionamiento correcto del menu de pausa durante el juego.
-- [Fix] Solo se soporta posicion horizontal en celular.

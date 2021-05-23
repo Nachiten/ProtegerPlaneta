@@ -14,10 +14,12 @@ public class LeanTweenManager : MonoBehaviour
     List<GameObject> botones;
 
     static GameObject menu, menuPanel, menuOpciones, menuCreditos, menuPuntajesRecord, botonesInicio,
-                      botonComenzar, botonOpciones, botonSalir, botonVolverInicio, botonBorrarProgreso, botonCreditos;
+                      botonComenzar, botonOpciones, botonSalir, botonVolverInicio;
 
     static int indexActual = -1;
     static bool variablesSeteadas = false;
+
+    static float tamañoXBoton, tamañoYBoton;
 
     #endregion
 
@@ -53,6 +55,9 @@ public class LeanTweenManager : MonoBehaviour
         botonComenzar = GameObject.Find("Comenzar");
         botonOpciones = GameObject.Find("Opciones");
         botonesInicio = GameObject.Find("Botones Inicio");
+
+        tamañoXBoton = botonComenzar.transform.localScale.x;
+        tamañoYBoton = botonComenzar.transform.localScale.y;
 
         // Botonces condicionales
         botonVolverInicio = GameObject.Find("VolverAInicio");
@@ -137,15 +142,15 @@ public class LeanTweenManager : MonoBehaviour
     void abrirBotonEnX(GameObject boton, bool terminarAnimacion)
     {
         boton.SetActive(true);
-        LeanTween.scaleX(boton, 2.3f, tiempoAnimacionBotonesMenu).setOnComplete(_ => abrirBotonEnY(boton, terminarAnimacion));
+        LeanTween.scaleX(boton, tamañoXBoton, tiempoAnimacionBotonesMenu).setOnComplete(_ => abrirBotonEnY(boton, terminarAnimacion));
     }
 
     void abrirBotonEnY(GameObject unBoton, bool terminarAnimacion)
     {
         if (terminarAnimacion)
-            LeanTween.scaleY(unBoton, 3.1f, tiempoAnimacionBotonesMenu).setOnComplete(terminarAnimacionAbrir);
+            LeanTween.scaleY(unBoton, tamañoYBoton, tiempoAnimacionBotonesMenu).setOnComplete(terminarAnimacionAbrir);
         else
-            LeanTween.scaleY(unBoton, 3.1f, tiempoAnimacionBotonesMenu);
+            LeanTween.scaleY(unBoton, tamañoYBoton, tiempoAnimacionBotonesMenu);
     }
 
     void terminarAnimacionAbrir()
@@ -174,7 +179,7 @@ public class LeanTweenManager : MonoBehaviour
             bool cerrarMenu = i == cantidadBotones - 1;
 
             // Posiciones iniciales
-            LeanTween.scale(botonActual, new Vector3(2.3f, 3.1f, 1), 0f).setOnComplete(_ => cerrarBotonEnY(botonActual, cerrarMenu));
+            LeanTween.scale(botonActual, new Vector3(tamañoXBoton, tamañoYBoton, 1), 0f).setOnComplete(_ => cerrarBotonEnY(botonActual, cerrarMenu));
         }
 
     }
