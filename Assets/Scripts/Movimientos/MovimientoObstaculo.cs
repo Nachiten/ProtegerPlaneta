@@ -9,7 +9,7 @@ public class MovimientoObstaculo : MonoBehaviour
     GameObject planeta;
 
     public float speed = 2.5f;
-    public float daño;
+    public float daÃ±o;
 
     float posInicialMax = 7f;
 
@@ -80,12 +80,14 @@ public class MovimientoObstaculo : MonoBehaviour
         }
 
         // Fijo la posicion a la random asignada
-        transform.position = new Vector2(posX, posY);
+        var thisTransform = transform;
+        
+        thisTransform.position = new Vector2(posX, posY);
 
         // Hago que el obstaculo mire hacia el planeta
-        transform.right = planeta.transform.position - transform.position;
+        thisTransform.right = planeta.transform.position - thisTransform.position;
 
-        velocidadActual = transform.right.normalized * speed;
+        velocidadActual = thisTransform.right.normalized * speed;
 
         // Fijo velocidad
         GetComponent<Rigidbody2D>().velocity = velocidadActual;
@@ -106,7 +108,7 @@ public class MovimientoObstaculo : MonoBehaviour
                 return;
             }      
 
-            codigoGameManager.perderVida(daño);
+            codigoGameManager.perderVida(daÃ±o);
         }
 
         if (collision.CompareTag("Jugador")) 
